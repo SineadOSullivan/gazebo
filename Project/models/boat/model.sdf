@@ -1,19 +1,117 @@
 <?xml version='1.0'?>
-<sdf version ='1.4'>
-  <model name ='boat'>
-    <pose>1 2 0 0 0 0</pose>
-    <link name ='link'>
-      <pose>0 0 .5 0 0 0</pose>
-      <collision name ='collision'>
+<sdf version='1.4'>
+  <model name="RoboBoat">
+    <static>true</static>
+
+    <link name='link'>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+        <mass>1</mass>
+      </inertial>
+
+      <collision name='hull_col'>
+        <pose>0 0.5 0.1 0 0 0</pose>
         <geometry>
-          <box><size>1 1 0.25</size></box>
+          <box>
+            <size>0.3 1.0 0.2</size>
+          </box>
         </geometry>
       </collision>
-      <visual name ='visual'>
+      <visual name='hull_vis'>
+        <pose>0 0.5 0.1 0 0 0</pose>
         <geometry>
-          <box><size>1 1 0.25</size></box>
+          <box>
+            <size>0.3 1.0 0.2</size>
+          </box>
         </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Black</name>
+          </script>
+        </material>
       </visual>
+
+      <collision name='top_col'>
+        <pose>0 0.15 0.25 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.3 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='top_vis'>
+        <pose>0 0.15 0.25 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.3 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+        </material>
+      </visual>
+
+      <collision name='left_col'>
+        <pose>-0.35 0.3 0.1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.6 0.2</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='left_vis'>
+        <pose>-0.35 0.3 0.1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.6 0.2</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Black</name>
+          </script>
+        </material>
+      </visual>
+
+      <collision name='right_col'>
+        <pose>0.35 0.3 0.1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.6 0.2</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='right_vis'>
+        <pose>0.35 0.3 0.1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.6 0.2</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Black</name>
+          </script>
+        </material>
+      </visual>
+
+
     </link>
+
   </model>
 </sdf>
