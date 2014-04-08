@@ -2,7 +2,7 @@
 
 using namespace gazebo;
 
-void MoveToGoal::MoveToGoal()
+MoveToGoal::MoveToGoal()
 {
 
 }
