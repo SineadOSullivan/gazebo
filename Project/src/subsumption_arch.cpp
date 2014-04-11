@@ -10,6 +10,7 @@ namespace gazebo
         // Store the pointer to the model
         this->_model = _parent;
 
+        /* DEBUGGING CODE
         gzmsg << "Number Sensors: " << _parent->GetSensorCount() << endl;
 
         for (int i = 0; i < _parent->GetChildCount(); i++)
@@ -25,6 +26,7 @@ namespace gazebo
                 gzmsg << "Scoped Name: " << ch2->GetScopedName() << endl;
             }
         }
+        */
         // Load parameters for this plugin
         if (this->LoadParams(_sdf))
         {
