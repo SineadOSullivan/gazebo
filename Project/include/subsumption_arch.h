@@ -7,10 +7,11 @@
 #include <gazebo/common/common.hh>
 #include <gazebo/sensors/sensors.hh>
 #include <stdio.h>
+#include "architecture.h"
 
 namespace gazebo
 {
-    class SubsumptionArch : public ModelPlugin
+    class SubsumptionArch : public ModelPlugin, public Architecture
     {
     public:
         /**
@@ -26,16 +27,7 @@ namespace gazebo
          */
         void OnUpdate(const common::UpdateInfo &);
     private:
-        /**
-         * Pointer to the model
-         * @brief model
-         */
-        physics::ModelPtr model;
-        /**
-         * Pointer to the update event connection
-         * @brief updateConnection
-         */
-        event::ConnectionPtr updateConnection;
+
     };
 
     // Register this plugin with the simulator

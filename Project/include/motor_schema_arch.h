@@ -11,10 +11,11 @@
 #include <avoidBoundary.h>
 #include <avoidObstacles.h>
 #include <moveToGoal.h>
+#include <architecture.h>
 
 namespace gazebo
 {
-    class MotorSchemaArch : public ModelPlugin
+    class MotorSchemaArch : public ModelPlugin, public Architecture
     {
     public:
         /**
@@ -29,40 +30,9 @@ namespace gazebo
          */
         void OnUpdate(const common::UpdateInfo &);
         void UpdateSensors();
-        //bool LoadSensor(sdf::ElementPtr _sdf, const std::string element, sensors::Sensor & _sensor);
         bool LoadParams(sdf::ElementPtr _sdf);
 
-        bool LoadIMU(sdf::ElementPtr _sdf, sensors::ImuSensorPtr & _sensor);
-        bool LoadGPS(sdf::ElementPtr _sdf, sensors::GpsSensorPtr & _sensor);
-        bool LoadLIDAR(sdf::ElementPtr _sdf, sensors::RaySensorPtr & _sensor);
-
     private:
-        /**
-         * Pointer to the model
-         * @brief model
-         */
-        physics::ModelPtr model;
-        /**
-         * Pointer to the update event connection
-         * @brief updateConnection
-         */
-        event::ConnectionPtr updateConnection;
-        /**
-         * Pointer to the LIDAR Sensor
-         * @brief lidar
-         */
-        sensors::RaySensorPtr lidar;
-        /**
-         * Pointer to the GPS Sensor
-         * @brief gps
-         */
-        sensors::GpsSensorPtr gps;
-        /**
-         * Pointer to the IMU Sensor
-         * @brief imu
-         */
-        sensors::ImuSensorPtr imu;
-
         // Model Parameters
         /**
          * GPS Coords of the Goal
@@ -80,5 +50,8 @@ namespace gazebo
         double kGoal;
         double kBoundary;
     };
+
+    // Register this plugin with the simulator
+    GZ_REGISTER_MODEL_PLUGIN(MotorSchemaArch)
 }
 #endif

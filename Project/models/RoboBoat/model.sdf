@@ -113,7 +113,7 @@
 
       <!---Add Sensors--->
 
-      <sensor name="LIDAR" type="ray">
+      <sensor name="lidar" type="ray">
 
         <pose>0 0.6 0.25 0 0 1.57079633</pose>
 
@@ -237,5 +237,6 @@
 
     	<!--Add Controller Script-->
     	<!--plugin name="NAME" filename="build/model_name.so"/-->
+	<!--<plugin name="subsumption_arch" filename="libsubsumption_arch.so"/>-->
   </model>
 </sdf>

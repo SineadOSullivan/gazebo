@@ -2,19 +2,16 @@
 
 using namespace gazebo;
 
-// Register this plugin with the simulator
-GZ_REGISTER_MODEL_PLUGIN(MotorSchemaArch)
-
 void MotorSchemaArch::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 {
     // Store the pointer to the model
-    this->model = _parent;
+    this->_model = _parent;
 
     // Load Parameters
     if( this->LoadParams(_sdf) )
     {
         // Listen to the update event every iteration
-        this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&MotorSchemaArch::OnUpdate, this, _1));
+        this->_updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&MotorSchemaArch::OnUpdate, this, _1));
     }
 }
 
@@ -56,130 +53,8 @@ bool MotorSchemaArch::LoadParams(sdf::ElementPtr _sdf)
     else
         this->maxSpeed = 1.0d;
 
-    // Load Sensors
-    return( LoadLIDAR(_sdf, this->lidar) &&
-            LoadGPS(_sdf, this->gps) &&
-            LoadIMU(_sdf, this->imu));
-}
-
-bool MotorSchemaArch::LoadLIDAR(sdf::ElementPtr _sdf, sensors::RaySensorPtr & _sensor)
-{
-    // Check for the Element
-    if( !_sdf->HasElement("lidar") )
-    {
-        gzerr << "param [lidar] not found\n";
-        return false;
-    }
-    else
-    {
-        // Get Sensor Name
-        std::string sensorName = _sdf->GetElement("lidar")->Get<std::string>();
-
-        // Get Pointer to the Sensor
-        sensors::SensorPtr sens = sensors::SensorManager::Instance()->GetSensor(sensorName);
-
-        // Check if Sensor Exists
-        if( !sens )
-        {
-            gzerr << "sensor by name ["
-                << sensorName
-                << "] not found in model\n";
-            return false;
-        }
-
-        // Check if sensor is the correct type
-        if( _sensor->GetType() == sens->GetType() )
-        {
-            // Dynamically cast the pointer
-            _sensor = boost::dynamic_pointer_cast<sensors::RaySensor>(sens);
-            return true;
-        }
-        else
-        {
-            gzerr << "Sensor by name ["<< sensorName << "] is wrong type\n";
-            return false;
-        }
-    }
-}
-
-bool MotorSchemaArch::LoadGPS(sdf::ElementPtr _sdf, sensors::GpsSensorPtr & _sensor)
-{
-    // Check for the Element
-    if( !_sdf->HasElement("gps") )
-    {
-        gzerr << "param [gps] not found\n";
-        return false;
-    }
-    else
-    {
-        // Get Sensor Name
-        std::string sensorName = _sdf->GetElement("gps")->Get<std::string>();
-
-        // Get Pointer to the Sensor
-        sensors::SensorPtr sens = sensors::SensorManager::Instance()->GetSensor(sensorName);
-
-        // Check if Sensor Exists
-        if( !sens )
-        {
-            gzerr << "sensor by name ["
-                << sensorName
-                << "] not found in model\n";
-            return false;
-        }
-
-        // Check if sensor is the correct type
-        if( _sensor->GetType() == sens->GetType() )
-        {
-            // Dynamically cast the pointer
-            _sensor = boost::dynamic_pointer_cast<sensors::GpsSensor>(sens);
-            return true;
-        }
-        else
-        {
-            gzerr << "Sensor by name ["<< sensorName << "] is wrong type\n";
-            return false;
-        }
-    }
-}
-
-bool MotorSchemaArch::LoadIMU(sdf::ElementPtr _sdf, sensors::ImuSensorPtr & _sensor)
-{
-    // Check for the Element
-    if( !_sdf->HasElement("imu") )
-    {
-        gzerr << "param [imu] not found\n";
-        return false;
-    }
-    else
-    {
-        // Get Sensor Name
-        std::string sensorName = _sdf->GetElement("imu")->Get<std::string>();
-
-        // Get Pointer to the Sensor
-        sensors::SensorPtr sens = sensors::SensorManager::Instance()->GetSensor(sensorName);
-
-        // Check if Sensor Exists
-        if( !sens )
-        {
-            gzerr << "sensor by name ["
-                << sensorName
-                << "] not found in model\n";
-            return false;
-        }
-
-        // Check if sensor is the correct type
-        if( _sensor->GetType() == sens->GetType() )
-        {
-            // Dynamically cast the pointer
-            _sensor = boost::dynamic_pointer_cast<sensors::ImuSensor>(sens);
-            return true;
-        }
-        else
-        {
-            gzerr << "Sensor by name ["<< sensorName << "] is wrong type\n";
-            return false;
-        }
-    }
+    // Initialize the architecture
+    return initialize(_sdf);
 }
 
 void MotorSchemaArch::UpdateSensors()
@@ -200,9 +75,9 @@ void MotorSchemaArch::OnUpdate(const common::UpdateInfo & /*_info*/)
     AvoidBoundary ab(kBoundary);
     AvoidObstacles ao(kAvoid);
     MoveToGoal mtg(kGoal);
-    V += ab.avoidBoundary(this->lidar) + 
-         ao.avoidObstacles(this->lidar) +
-	     mtg.moveToGoal(this->gps);
+    V += ab.avoidBoundary(this->_lidar) +
+         ao.avoidObstacles(this->_lidar) +
+         mtg.moveToGoal(this->_gps);
 
     // Normalize Vector Result
     double spd = V.GetLength();
@@ -212,5 +87,5 @@ void MotorSchemaArch::OnUpdate(const common::UpdateInfo & /*_info*/)
     }
 
     // Apply vector velocity to the model
-    this->model->SetLinearVel(V);
+    this->_model->SetLinearVel(V);
 }

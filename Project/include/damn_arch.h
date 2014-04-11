@@ -6,10 +6,11 @@
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <stdio.h>
+#include "architecture.h"
 
 namespace gazebo
 {
-    class DamnArch : public ModelPlugin
+    class DamnArch : public ModelPlugin, public Architecture
     {
     public:
         /**
@@ -24,16 +25,10 @@ namespace gazebo
          */
         void OnUpdate(const common::UpdateInfo &);
     private:
-        /**
-         * Pointer to the model
-         * @brief model
-         */
-        physics::ModelPtr model;
-        /**
-         * Pointer to the update event connection
-         * @brief updateConnection
-         */
-        event::ConnectionPtr updateConnection;
+
     };
+
+    // Register this plugin with the simulator
+    GZ_REGISTER_MODEL_PLUGIN(DamnArch)
 }
 #endif

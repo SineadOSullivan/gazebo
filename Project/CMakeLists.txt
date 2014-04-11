@@ -24,21 +24,23 @@ link_directories(${GAZEBO_LIBRARY_DIRS})
 
 # Add Behavior Source and Header files
 file(GLOB BEHAVIOR_SRCS behavior_include/*.h behavior/*.cpp)
+# Add Common Architecture Source and Header files
+file(GLOB ARCHITECTURE_SRCS include/architecture.h src/architecture.cpp)
 
 # Add Subsumption Source and Header files
 file(GLOB SUBSUMPTION_SRCS include/subsumption_arch.h src/subsumption_arch.cpp)
 # Add Subsumption Architecture Library
-add_library(subsumption_arch SHARED ${SUBSUMPTION_SRCS} ${BEHAVIOR_SRCS})
+add_library(subsumption_arch SHARED ${SUBSUMPTION_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
 target_link_libraries(subsumption_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
 
 # Add Motor Schema Source and Header files
 file(GLOB MOTOR_SCHEMA_SRCS include/motor_schema_arch.h src/motor_schema_arch.cpp)
 # Add Motor Schema Architecture Library
-add_library(motor_schema_arch SHARED ${MOTOR_SCHEMA_SRCS} ${BEHAVIOR_SRCS})
+add_library(motor_schema_arch SHARED ${MOTOR_SCHEMA_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
 target_link_libraries(motor_schema_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
 
 # Add DAMN Source and Header files
 file(GLOB DAMN_SRCS include/damn_arch.h src/damn_arch.cpp)
 # Add DAMN Architecture Library
-add_library(damn_arch SHARED ${DAMN_SRCS} ${BEHAVIOR_SRCS})
+add_library(damn_arch SHARED ${DAMN_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
 target_link_libraries(damn_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})

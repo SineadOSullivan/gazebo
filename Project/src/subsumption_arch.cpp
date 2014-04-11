@@ -1,85 +1,50 @@
 #include "subsumption_arch.h"
 
-//using namespace gazebo;
+using namespace std;
+
 namespace gazebo
 {
-
-void SubsumptionArch::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
-{
-    printf("Loading Subsumption Architecture plugin...\n");
-    // Store the pointer to the model
-    this->model = _parent;
-
-    // Load parameters for this plugin
-    if (this->LoadParams(_sdf))
+    void SubsumptionArch::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
-        printf("Successfully loaded parameters!\n");
-        // Listen to the update event. This event is broadcast every
-        // simulation iteration.
-        this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&SubsumptionArch::OnUpdate, this, _1));
-    }
-}
+        gzmsg << "Loading Subsumption Architecture plugin..." << endl;
+        // Store the pointer to the model
+        this->_model = _parent;
 
-bool SubsumptionArch::LoadParams(sdf::ElementPtr _sdf)
-{
-    return true;
-    // Find controller gain
-    if (!_sdf->HasElement("gain"))
-    {
-        printf("param[gain] not found\n");
-        gzerr << "param [gain] not found\n";
-        return false;
-    }
-    else
-    {
-        // Get sensor name
-        //this->gain = _sdf->GetElement("gain")->GetValueDouble();
-    }
+        gzmsg << "Number Sensors: " << _parent->GetSensorCount() << endl;
 
-    // Find sensor name from plugin param
-    if (!_sdf->HasElement("ray_sensor"))
-    {
-        printf("param [ray_sensor] not found\n");
-        gzerr << "param [ray_sensor] not found\n";
-        return false;
-    }
-    else
-    {
-        // Get sensor name
-        std::string sensorName = _sdf->GetElement("ray_sensor")->GetValueString();
-
-        // Get pointer to sensor using the SensorMangaer
-        //sensors::RaySensorPtr sensor = sensors::
-        sensors::SensorPtr sensor = sensors::SensorManager::Instance()->GetSensor(sensorName);
-
-        if (!sensor)
+        for (int i = 0; i < _parent->GetChildCount(); i++)
         {
-            gzerr << "sensor by name ["
-                  << sensorName
-                  << "] not found in model\n";
-            return false;
+            physics::BasePtr ch = _parent->GetChild(i);
+            gzmsg << "ID: " << ch->GetId() << endl;
+            gzmsg << "Scoped Name: " << ch->GetScopedName() << endl;
+            for (int j = 0; j < ch->GetChildCount(); j++)
+            {
+                physics::BasePtr ch2 = ch->GetChild(j);
+                gzmsg << "ID: " << ch2->GetId() << endl;
+                gzmsg << "Name: " << ch2->GetName() << endl;
+                gzmsg << "Scoped Name: " << ch2->GetScopedName() << endl;
+            }
         }
-
-        /*
-        this->laser = boost::shared_dynamic_cast<sensors::RaySensor>(sensor);
-        if (!this->laser)
+        // Load parameters for this plugin
+        if (this->LoadParams(_sdf))
         {
-            gzerr << "laser by name ["
-                  << sensorName
-                  << "] not found in model\n";
-            return false;
+            gzmsg << "Successfully loaded parameters!" << endl;
+            // Listen to the update event. This event is broadcast every
+            // simulation iteration.
+            this->_updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&SubsumptionArch::OnUpdate, this, _1));
         }
-        */
     }
 
-    // success
-    return true;
-}
+    bool SubsumptionArch::LoadParams(sdf::ElementPtr _sdf)
+    {
+        // Initialize the architecture
+        return initialize(_sdf);
+    }
 
-// Called by the world update start event
-void SubsumptionArch::OnUpdate(const common::UpdateInfo & /*_info*/)
-{
-    // Apply a small linear velocity to the model.
-    this->model->SetLinearVel(math::Vector3(.5, 0, 0));
-}
+    // Called by the world update start event
+    void SubsumptionArch::OnUpdate(const common::UpdateInfo & /*_info*/)
+    {
+        // Apply a small linear velocity to the model.
+        this->_model->SetLinearVel(math::Vector3(.5, 0, 0));
+    }
 }
