@@ -5,7 +5,12 @@
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
+#include <gazebo/sensors/sensors.hh>
+#include <gazebo/transport/transport.hh>
 #include <stdio.h>
+#include <avoidBoundary.h>
+#include <avoidObstacles.h>
+#include <moveToGoal.h>
 
 namespace gazebo
 {
@@ -23,6 +28,14 @@ namespace gazebo
          * @brief OnUpdate
          */
         void OnUpdate(const common::UpdateInfo &);
+        void UpdateSensors();
+        //bool LoadSensor(sdf::ElementPtr _sdf, const std::string element, sensors::Sensor & _sensor);
+        bool LoadParams(sdf::ElementPtr _sdf);
+
+        bool LoadIMU(sdf::ElementPtr _sdf, sensors::ImuSensorPtr & _sensor);
+        bool LoadGPS(sdf::ElementPtr _sdf, sensors::GpsSensorPtr & _sensor);
+        bool LoadLIDAR(sdf::ElementPtr _sdf, sensors::RaySensorPtr & _sensor);
+
     private:
         /**
          * Pointer to the model
@@ -34,6 +47,38 @@ namespace gazebo
          * @brief updateConnection
          */
         event::ConnectionPtr updateConnection;
+        /**
+         * Pointer to the LIDAR Sensor
+         * @brief lidar
+         */
+        sensors::RaySensorPtr lidar;
+        /**
+         * Pointer to the GPS Sensor
+         * @brief gps
+         */
+        sensors::GpsSensorPtr gps;
+        /**
+         * Pointer to the IMU Sensor
+         * @brief imu
+         */
+        sensors::ImuSensorPtr imu;
+
+        // Model Parameters
+        /**
+         * GPS Coords of the Goal
+         * @brief goalGPS
+         */
+        sdf::Vector3 goalGPS;
+        /**
+         * Maximum Model Speed
+         * @brief maxSpeed
+         */
+        double maxSpeed;
+
+        // Control Gains
+        double kAvoid;
+        double kGoal;
+        double kBoundary;
     };
 }
 #endif

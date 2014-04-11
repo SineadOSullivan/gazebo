@@ -5,6 +5,7 @@
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
+#include <gazebo/sensors/sensors.hh>
 #include <stdio.h>
 
 namespace gazebo
@@ -17,7 +18,8 @@ namespace gazebo
          * @brief Load
          * @param _parent
          */
-        void Load(physics::ModelPtr _parent, sdf::ElementPtr);
+        void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
+        bool LoadParams(sdf::ElementPtr _sdf);
         /**
          * Called by the world update start event
          * @brief OnUpdate
@@ -35,5 +37,8 @@ namespace gazebo
          */
         event::ConnectionPtr updateConnection;
     };
+
+    // Register this plugin with the simulator
+    GZ_REGISTER_MODEL_PLUGIN(SubsumptionArch)
 }
 #endif

@@ -2,7 +2,7 @@
 
 using namespace gazebo;
 
-Behavior::Behavior()
+Behavior::Behavior(double kGain)
 {
-
+    this->_kGain = kGain;
 }

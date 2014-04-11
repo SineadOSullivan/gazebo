@@ -13,7 +13,8 @@ namespace gazebo
     class MoveToGoal : public Behavior
     {
     public:
-        MoveToGoal();
+        MoveToGoal(double kGoal);
+        math::Vector3 moveToGoal(sensors::GpsSensorPtr gps);
     private:
 
     };

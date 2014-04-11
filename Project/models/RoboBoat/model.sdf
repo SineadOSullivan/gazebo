@@ -232,12 +232,10 @@
 
     </link>
   
-    <!---Add Joints--->
+    	<!---Add Joints--->
 
 
-    <!--Add Controller Script-->
-    <!--plugin name="NAME" filename="build/model_name.so"/-->
-
-
+    	<!--Add Controller Script-->
+    	<!--plugin name="NAME" filename="build/model_name.so"/-->
   </model>
 </sdf>

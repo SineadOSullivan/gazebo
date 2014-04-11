@@ -12,7 +12,9 @@ namespace gazebo
     class Behavior
     {
     public:
-        Behavior();
+        Behavior(double kGain);
+    protected:
+        double _kGain;
     private:
 
     };
