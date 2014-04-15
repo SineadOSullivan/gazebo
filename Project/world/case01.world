@@ -1071,7 +1071,6 @@
   <include>
     <uri>model://RoboBoat</uri>
     <pose>4.5 -10.0 0 0 0 0</pose>
-    <plugin name="subsumption_arch" filename="libsubsumption_arch.so"/>
   </include>
 
   ##############################################################################

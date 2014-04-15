@@ -7,7 +7,6 @@
 #include <gazebo/common/common.hh>
 #include <stdio.h>
 #include "behavior.h"
-#include <statics.h>
 
 namespace gazebo
 {

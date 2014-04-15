@@ -13,8 +13,11 @@ namespace gazebo
     class AvoidBoundary : public Behavior
     {
     public:
+        AvoidBoundary();
         AvoidBoundary(double kBoundary);
-        math::Vector3 avoidBoundary(sensors::RaySensorPtr lidar);
+        math::Vector3 avoidBoundarySubsumption();
+        math::Vector3 avoidBoundaryDamn();
+        math::Vector3 avoidBoundaryMotorSchema();
     private:
 
     };

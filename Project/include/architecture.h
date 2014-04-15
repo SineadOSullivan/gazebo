@@ -7,6 +7,11 @@
 #include <gazebo/common/common.hh>
 #include <gazebo/sensors/sensors.hh>
 #include <stdio.h>
+#include <avoidBoundary.h>
+#include <avoidObstacles.h>
+#include <moveToGoal.h>
+#include <noise.h>
+#include <statics.h>
 
 namespace gazebo
 {
@@ -33,6 +38,18 @@ namespace gazebo
          * @return
          */
         bool LoadLIDAR(sdf::ElementPtr _sdf);
+        /**
+         * @brief LoadParams
+         * @param _sdf
+         * @return
+         */
+        bool LoadParams(sdf::ElementPtr _sdf);
+
+        /**
+         * @brief UpdatePosition
+         * @param _info
+         */
+        void UpdatePosition(const common::UpdateInfo & _info);
 
         /**
          * Pointer to the model
@@ -59,6 +76,22 @@ namespace gazebo
          * @brief imu
          */
         sensors::ImuSensorPtr _imu;
+        /**
+         * @brief _avoidBdry
+         */
+        gazebo::AvoidBoundary _avoidBdry;
+        /**
+         * @brief _avoidObs
+         */
+        gazebo::AvoidObstacles _avoidObs;
+        /**
+         * @brief _moveToGoal
+         */
+        gazebo::MoveToGoal _moveToGoal;
+        /**
+         * @brief _noise
+         */
+        Noise _noise;
 
     private:
 

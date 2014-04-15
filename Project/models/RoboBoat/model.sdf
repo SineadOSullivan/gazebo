@@ -113,7 +113,7 @@
 
       <!---Add Sensors--->
 
-      <sensor name="lidar" type="ray">
+      <sensor name="LIDAR" type="ray">
 
         <pose>0 0.6 0.25 0 0 1.57079633</pose>
 
@@ -199,13 +199,13 @@
             <horizontal>
               <noise type="gaussian">
                 <mean>0</mean>
-                <stddev>1.5</steddev>
+                <stddev>1.5</stddev>
               </noise>
             </horizontal>
             <vertical>
               <noise type="gaussian">
                 <mean>0</mean>
-                <stddev>3.0</steddev>
+                <stddev>3.0</stddev>
               </noise>
             </vertical>
           </position_sensing>
@@ -213,13 +213,13 @@
             <horizontal>
               <noise type="gaussian">
                 <mean>0</mean>
-                <stddev>0.005</steddev>
+                <stddev>0.005</stddev>
               </noise>
             </horizontal>
             <vertical>
               <noise type="gaussian">
                 <mean>0</mean>
-                <stddev>0.01</steddev>
+                <stddev>0.01</stddev>
               </noise>
             </vertical>
           </velocity_sensing>
@@ -236,7 +236,18 @@
 
 
     	<!--Add Controller Script-->
-    	<!--plugin name="NAME" filename="build/model_name.so"/-->
-	<!--<plugin name="subsumption_arch" filename="libsubsumption_arch.so"/>-->
+    	<!--<plugin name="NAME" filename="build/model_name.so"/>-->
+	<plugin name="subsumption_arch" filename="libsubsumption_arch.so">
+		<gain_avoid>5.0</gain_avoid>
+		<gain_boundary>1.0</gain_boundary>
+		<gain_noise>0.1</gain_noise>
+
+		<goal>4.5 100 0</goal>
+		<max_speed>3.6</max_speed>
+
+		<lidar>LIDAR</lidar>
+		<imu>IMU</imu>
+		<gps>GPS</gps>
+	</plugin>
   </model>
 </sdf>

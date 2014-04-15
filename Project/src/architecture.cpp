@@ -8,7 +8,8 @@ namespace gazebo
         gzmsg << "Initializing the architecture" << endl;
         return (this->LoadLIDAR(_sdf) &&
                 this->LoadGPS(_sdf) &&
-                this->LoadIMU(_sdf));
+                this->LoadIMU(_sdf) &&
+                this->LoadParams(_sdf));
     }
 
     bool Architecture::LoadLIDAR(sdf::ElementPtr _sdf)
@@ -26,19 +27,17 @@ namespace gazebo
             std::string sensorName = _sdf->GetElement("lidar")->Get<std::string>();
 
             // Get Pointer to the Sensor
-            sensors::SensorPtr sens = sensors::SensorManager::Instance()->GetSensor(sensorName);
+            sensors::SensorPtr sens = sensors::SensorManager::Instance()->GetSensor("LIDAR");
 
             // Check if Sensor Exists
             if( !sens )
             {
-                gzerr << "sensor by name ["
-                    << sensorName
-                    << "] not found in model\n";
+                gzerr << "sensor by name [" << sensorName << "] not found in model\n";
                 return false;
             }
 
             // Check if sensor is the correct type
-            if( sens->GetType() == "RaySensor")
+            if( sens->GetType() == "ray")
             {
                 // Dynamically cast the pointer
                 this->_lidar = boost::dynamic_pointer_cast<sensors::RaySensor>(sens);
@@ -54,6 +53,7 @@ namespace gazebo
 
     bool Architecture::LoadGPS(sdf::ElementPtr _sdf)
     {
+        gzmsg << "Loading GPS..." << endl;
         // Check for the Element
         if( !_sdf->HasElement("gps") )
         {
@@ -71,14 +71,12 @@ namespace gazebo
             // Check if Sensor Exists
             if( !sens )
             {
-                gzerr << "sensor by name ["
-                    << sensorName
-                    << "] not found in model\n";
+                gzerr << "sensor by name [" << sensorName << "] not found in model\n";
                 return false;
             }
 
             // Check if sensor is the correct type
-            if( sens->GetType() == "GpsSensor" )
+            if( sens->GetType() == "gps" )
             {
                 // Dynamically cast the pointer
                 this->_gps = boost::dynamic_pointer_cast<sensors::GpsSensor>(sens);
@@ -94,6 +92,7 @@ namespace gazebo
 
     bool Architecture::LoadIMU(sdf::ElementPtr _sdf)
     {
+        gzmsg << "Loading IMU..." << endl;
         // Check for the Element
         if( !_sdf->HasElement("imu") )
         {
@@ -111,14 +110,12 @@ namespace gazebo
             // Check if Sensor Exists
             if( !sens )
             {
-                gzerr << "sensor by name ["
-                      << sensorName
-                      << "] not found in model\n";
+                gzerr << "sensor by name [" << sensorName << "] not found in model\n";
                 return false;
             }
 
             // Check if sensor is the correct type
-            if( sens->GetType() == "ImuSensor" )
+            if( sens->GetType() == "imu" )
             {
                 // Dynamically cast the pointer
                 this->_imu = boost::dynamic_pointer_cast<sensors::ImuSensor>(sens);
@@ -130,5 +127,79 @@ namespace gazebo
                 return false;
             }
         }
+    }
+
+    bool Architecture::LoadParams(sdf::ElementPtr _sdf)
+    {
+        // Load Gains
+        if( _sdf->HasElement("gain_avoid") )
+        {
+            this->_avoidObs = AvoidObstacles(_sdf->GetElement("gain_avoid")->Get<double>());
+        }
+        else
+        {
+            gzerr << "No gain_avoid parameter defined" << endl;
+            return false;
+        }
+
+        if( _sdf->HasElement("gain_boundary") )
+        {
+            this->_avoidBdry = AvoidBoundary(_sdf->GetElement("gain_boundary")->Get<double>());
+        }
+        else
+        {
+            gzerr << "No gain_boundary parameter defined" << endl;
+            return false;
+        }
+
+        if( _sdf->HasElement("gain_noise") )
+        {
+            this->_noise = Noise(_sdf->GetElement("gain_noise")->Get<double>());
+        }
+        else
+        {
+            gzerr << "No gain_noise parameter defined" << endl;
+            return false;
+        }
+
+        // Load Goal Coordinate
+        if( _sdf->HasElement("goal") && _sdf->HasElement("gain_goal") )
+        {
+            this->_moveToGoal = MoveToGoal(_sdf->GetElement("gain_goal")->Get<double>(), _sdf->GetElement("goal")->Get<math::Vector3>());
+        }
+        else
+        {
+            gzerr << "No goal and gain_goal parameter defined" << endl;
+            return false;
+        }
+
+        // Load Maximum Speed
+        if( _sdf->HasElement("max_speed") )
+        {
+            Statics::MAX_SPEED = _sdf->GetElement("max_speed")->Get<double>();
+        }
+        else
+        {
+            gzerr << "No max_speed parameter defined" << endl;
+            return false;
+        }
+        return true;
+    }
+
+    void Architecture::UpdatePosition(const common::UpdateInfo & _info)
+    {
+        // Update Position from GPS.  Could eventually implement Kalman filter
+
+        // Method Variables
+        const double earthRad = 6371009; //Radius of the earth in meters
+
+        // Convert GPS to x,y,z
+        math::Angle lat = this->_gps->GetLatitude();
+        math::Angle lon = this->_gps->GetLongitude();
+
+        // Update the position
+        Statics::CURRENT_POS = math::Vector3( earthRad*lat.Radian(),
+                                              earthRad*lon.Radian(),
+                                              this->_gps->GetAltitude() );
     }
 }

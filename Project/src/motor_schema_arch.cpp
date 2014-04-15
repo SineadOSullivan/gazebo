@@ -74,7 +74,7 @@ void MotorSchemaArch::OnUpdate(const common::UpdateInfo & /*_info*/)
     // Run Behaviors
     AvoidBoundary ab(kBoundary);
     AvoidObstacles ao(kAvoid);
-    MoveToGoal mtg(kGoal);
+    MoveToGoal mtg(kGoal, math::Angle::HalfPi, math::Angle::Pi);
     V += ab.avoidBoundary(this->_lidar) +
          ao.avoidObstacles(this->_lidar) +
          mtg.moveToGoal(this->_gps);

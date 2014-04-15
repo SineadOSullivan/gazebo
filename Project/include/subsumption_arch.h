@@ -20,7 +20,6 @@ namespace gazebo
          * @param _parent
          */
         void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
-        bool LoadParams(sdf::ElementPtr _sdf);
         /**
          * Called by the world update start event
          * @brief OnUpdate

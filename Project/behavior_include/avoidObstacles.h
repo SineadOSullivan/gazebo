@@ -13,8 +13,12 @@ namespace gazebo
     class AvoidObstacles : public Behavior
     {
     public:
+        AvoidObstacles();
         AvoidObstacles(double kAvoid);
-        math::Vector3 avoidObstacles(sensors::RaySensorPtr lidar);
+
+        math::Vector3 avoidObstaclesSubsumption(sensors::RaySensorPtr lidar);
+        math::Vector3 avoidObstaclesDamn(sensors::RaySensorPtr lidar);
+        math::Vector3 avoidObstaclesMotorSchema(sensors::RaySensorPtr lidar);
     private:
 
     };
