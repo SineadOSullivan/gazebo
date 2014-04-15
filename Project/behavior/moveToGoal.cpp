@@ -1,6 +1,7 @@
 #include "moveToGoal.h"
 
 using namespace gazebo;
+using namespace std;
 
 MoveToGoal::MoveToGoal()
     : Behavior(1.0d)
@@ -14,23 +15,23 @@ MoveToGoal::MoveToGoal(double kGoal, math::Vector3 vGoal)
     this->_vGoal = vGoal;
 }
 
-math::Vector3 MoveToGoal::moveToGoalSubsumption()
+math::Vector3 MoveToGoal::moveToGoalSubsumption(double maxSpeed, math::Vector3 currentPosition)
 {
     // Check for goal position
-    if (Statics::CURRENT_POS == _vGoal)
+    if (currentPosition == _vGoal)
         // Return no movement
         return math::Vector3(0.0d, 0.0d, 0.0d);
     // Not at the goal position
     else
     {
         // Get the vector from current position to goal
-        math::Vector3 vToGoal = this->_vGoal - Statics::CURRENT_POS;
+        math::Vector3 vToGoal = this->_vGoal - currentPosition;
 
         // Normalize the vector
         vToGoal = vToGoal.Normalize();
 
         // Scale to max speed
-        vToGoal *= Statics::MAX_SPEED;
+        vToGoal *= maxSpeed;
 
         // Return the scaled vector
         return vToGoal;
@@ -42,17 +43,18 @@ math::Vector3 MoveToGoal::moveToGoalDamn()
 
 }
 
-math::Vector3 MoveToGoal::moveToGoalMotorSchema()
+math::Vector3 MoveToGoal::moveToGoalMotorSchema(double maxSpeed, math::Vector3 currentPosition)
 {
+    gzmsg << "MoveToGoal - Motor Schema" << endl;
     // Method Variables
-    double closeEnough = Statics::MAX_SPEED;
+    double closeEnough = maxSpeed;
     double distToGoal;
 
     math::Vector3 V;
     math::Vector3 toGoal;
 
     // Compute Distance to Goal
-    toGoal = this->_vGoal - Statics::CURRENT_POS;
+    toGoal = this->_vGoal - currentPosition;
     distToGoal = toGoal.GetLength();
 
     // Compute Speed
@@ -62,7 +64,7 @@ math::Vector3 MoveToGoal::moveToGoalMotorSchema()
     }
     else
     {
-        V = Statics::MAX_SPEED*( toGoal/distToGoal );
+        V = maxSpeed*( toGoal/distToGoal );
     }
 
     // Return Result

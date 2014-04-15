@@ -7,7 +7,6 @@
 #include <gazebo/common/common.hh>
 #include <stdio.h>
 #include "behavior.h"
-#include <statics.h>
 
 namespace gazebo
 {
@@ -16,9 +15,9 @@ namespace gazebo
     public:
         MoveToGoal();
         MoveToGoal(double kGoal, math::Vector3 vGoal);
-        math::Vector3 moveToGoalSubsumption();
+        math::Vector3 moveToGoalSubsumption(double maxSpeed, math::Vector3 currentPosition);
         math::Vector3 moveToGoalDamn();
-        math::Vector3 moveToGoalMotorSchema();
+        math::Vector3 moveToGoalMotorSchema(double maxSpeed, math::Vector3 currentPosition);
     private:
         math::Vector3 _vGoal;
     };

@@ -11,7 +11,6 @@
 #include <avoidObstacles.h>
 #include <moveToGoal.h>
 #include <noise.h>
-#include <statics.h>
 
 namespace gazebo
 {
@@ -92,6 +91,9 @@ namespace gazebo
          * @brief _noise
          */
         Noise _noise;
+
+        math::Vector3 _currentPosition;
+        double _maxSpeed;
 
     private:
 

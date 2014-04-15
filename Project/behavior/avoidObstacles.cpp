@@ -1,6 +1,7 @@
 #include "avoidObstacles.h"
 
 using namespace gazebo;
+using namespace std;
 
 AvoidObstacles::AvoidObstacles()
     : Behavior(1.0d)
@@ -24,35 +25,47 @@ math::Vector3 AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar)
 
 math::Vector3 AvoidObstacles::avoidObstaclesMotorSchema(sensors::RaySensorPtr lidar)
 {
+    gzmsg << "Avoid Obstacles - Motor Schema" << endl;
     // Sensor Parameters
     const int n = lidar->GetRangeCount();
+    gzmsg << "N: " << n << endl;
     const double maxR = lidar->GetRangeMax();
+    gzmsg << "MaxR: " << maxR << endl;
     const double minR = lidar->GetRangeMin();
+    gzmsg << "MinR: " << minR << endl;
     const double res = lidar->GetAngleResolution();
+    gzmsg << "Res: " << res << endl;
 
+    gzmsg << "Initialize method variables" << endl;
     // Method Variables
     double mag = 0.0;
     double angle = (lidar->GetAngleMin()).Radian();
 
-    std::vector<double> ranges;
+    //std::vector<double> ranges(n);
     math::Vector3 V = math::Vector3(0, 0, 0);
 
+    /*
+    gzmsg << "Update Sensor Data" << endl;
+    gzmsg << "Ranges: " << ranges.size() << endl;
     // Update Sensor Data
     lidar->GetRanges(ranges);
+    gzmsg << "NewRanges: " << ranges.size() << endl;
+    */
 
     // Loop over range data
-    for( unsigned int i=0; i < n; i++ )
+    for( unsigned int i=0; i < lidar->GetRangeCount(); i++ )
     {
         //Check for minimum range
-        if( ranges[i] < minR )
+        if( lidar->GetRange(i) < minR )//ranges[i] < minR )
         {
-            ranges[i] = maxR;
+            gzmsg << "Range below the minimum..." << endl;
+            //ranges[i] = maxR;
         }
 
         // Compute Repulsion Magnitude
-        if(ranges[i] < 0.95 * maxR)
+        if(lidar->GetRange(i) < 0.95 * maxR)//ranges[i] < 0.95 * maxR)
         {
-            mag = _kGain / pow(ranges[i] - 0.95 * minR, 2);
+            mag = _kGain / pow(lidar->GetRange(i) - 0.95 * minR, 2);//ranges[i] - 0.95 * minR, 2);
         }
         else
         {

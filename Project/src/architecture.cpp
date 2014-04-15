@@ -134,6 +134,7 @@ namespace gazebo
         // Load Gains
         if( _sdf->HasElement("gain_avoid") )
         {
+            gzmsg << "Avoidance Gain: " << _sdf->GetElement("gain_avoid")->Get<double>() << endl;
             this->_avoidObs = AvoidObstacles(_sdf->GetElement("gain_avoid")->Get<double>());
         }
         else
@@ -144,6 +145,7 @@ namespace gazebo
 
         if( _sdf->HasElement("gain_boundary") )
         {
+            gzmsg << "Boundary Gain: " << _sdf->GetElement("gain_boundary")->Get<double>() << endl;
             this->_avoidBdry = AvoidBoundary(_sdf->GetElement("gain_boundary")->Get<double>());
         }
         else
@@ -154,6 +156,7 @@ namespace gazebo
 
         if( _sdf->HasElement("gain_noise") )
         {
+            gzmsg << "Noise Gain: " << _sdf->GetElement("gain_noise")->Get<double>() << endl;
             this->_noise = Noise(_sdf->GetElement("gain_noise")->Get<double>());
         }
         else
@@ -165,6 +168,8 @@ namespace gazebo
         // Load Goal Coordinate
         if( _sdf->HasElement("goal") && _sdf->HasElement("gain_goal") )
         {
+            gzmsg << "Goal Gain: " << _sdf->GetElement("gain_goal")->Get<double>() << endl;
+            gzmsg << "Goal: " << _sdf->GetElement("goal")->Get<math::Vector3>() << endl;
             this->_moveToGoal = MoveToGoal(_sdf->GetElement("gain_goal")->Get<double>(), _sdf->GetElement("goal")->Get<math::Vector3>());
         }
         else
@@ -176,7 +181,8 @@ namespace gazebo
         // Load Maximum Speed
         if( _sdf->HasElement("max_speed") )
         {
-            Statics::MAX_SPEED = _sdf->GetElement("max_speed")->Get<double>();
+            gzmsg << "Max Speed: " << _sdf->GetElement("max_speed")->Get<double>() << endl;
+            _maxSpeed = _sdf->GetElement("max_speed")->Get<double>();
         }
         else
         {
@@ -189,17 +195,17 @@ namespace gazebo
     void Architecture::UpdatePosition(const common::UpdateInfo & _info)
     {
         // Update Position from GPS.  Could eventually implement Kalman filter
-
         // Method Variables
         const double earthRad = 6371009; //Radius of the earth in meters
-
+        gzmsg << "Getting Latitude & Longitude" << endl;
         // Convert GPS to x,y,z
         math::Angle lat = this->_gps->GetLatitude();
         math::Angle lon = this->_gps->GetLongitude();
 
+        gzmsg << "Updating the position" << endl;
         // Update the position
-        Statics::CURRENT_POS = math::Vector3( earthRad*lat.Radian(),
-                                              earthRad*lon.Radian(),
-                                              this->_gps->GetAltitude() );
+        _currentPosition = math::Vector3( earthRad*lat.Radian(),
+                                          earthRad*lon.Radian(),
+                                          this->_gps->GetAltitude() );
     }
 }

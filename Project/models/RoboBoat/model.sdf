@@ -237,12 +237,27 @@
 
     	<!--Add Controller Script-->
     	<!--<plugin name="NAME" filename="build/model_name.so"/>-->
+<!--
 	<plugin name="subsumption_arch" filename="libsubsumption_arch.so">
 		<gain_avoid>5.0</gain_avoid>
 		<gain_boundary>1.0</gain_boundary>
 		<gain_noise>0.1</gain_noise>
 
 		<goal>4.5 100 0</goal>
+		<max_speed>3.6</max_speed>
+
+		<lidar>LIDAR</lidar>
+		<imu>IMU</imu>
+		<gps>GPS</gps>
+	</plugin>
+-->
+	<plugin name="motor_schema_arch" filename="libmotor_schema_arch.so">
+		<gain_avoid>0.1</gain_avoid>
+		<gain_boundary>1.0</gain_boundary>
+		<gain_noise>0.1</gain_noise>
+
+		<goal>4.5 100 0</goal>
+		<gain_goal>1.0</gain_goal>
 		<max_speed>3.6</max_speed>
 
 		<lidar>LIDAR</lidar>
