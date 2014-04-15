@@ -25,10 +25,15 @@ namespace gazebo
          */
         void Load(physics::ModelPtr _parent, sdf::ElementPtr);
         /**
+         * Load(namespace::class name, namespace::classname)
          * Called by the world update start event
          * @brief OnUpdate
          */
         void OnUpdate(const common::UpdateInfo &);
+        /** & symbol means pass in reference instead of value
+         * const tells it you can't modify info, constant, giving it the location and memory 
+         
+         Load and OnUpdate defines what you do, what are we doing every iteration, every time plugin is called*/
         void UpdateSensors();
         bool LoadParams(sdf::ElementPtr _sdf);
 
