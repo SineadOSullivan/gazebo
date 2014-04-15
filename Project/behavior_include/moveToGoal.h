@@ -18,6 +18,8 @@ namespace gazebo
         math::Vector3 moveToGoalSubsumption(double maxSpeed, math::Vector3 currentPosition);
         math::Vector3 moveToGoalDamn();
         math::Vector3 moveToGoalMotorSchema(double maxSpeed, math::Vector3 currentPosition);
+
+        math::Vector3 getGoal();
     private:
         math::Vector3 _vGoal;
     };

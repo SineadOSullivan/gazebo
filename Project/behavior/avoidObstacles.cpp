@@ -15,7 +15,7 @@ AvoidObstacles::AvoidObstacles(double kAvoid)
 
 math::Vector3 AvoidObstacles::avoidObstaclesSubsumption(sensors::RaySensorPtr lidar)
 {
-
+    return math::Vector3(0.0d, 0.0d, 0.0d);
 }
 
 math::Vector3 AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar)

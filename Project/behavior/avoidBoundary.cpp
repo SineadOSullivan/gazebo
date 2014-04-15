@@ -15,7 +15,7 @@ AvoidBoundary::AvoidBoundary(double kBoundary)
 
 math::Vector3 AvoidBoundary::avoidBoundarySubsumption()
 {
-
+    return math::Vector3(0.0d, 0.0d, 0.0d);
 }
 
 math::Vector3 AvoidBoundary::avoidBoundaryDamn()

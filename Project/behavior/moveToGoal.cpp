@@ -15,6 +15,11 @@ MoveToGoal::MoveToGoal(double kGoal, math::Vector3 vGoal)
     this->_vGoal = vGoal;
 }
 
+math::Vector3 MoveToGoal::getGoal()
+{
+    return this->_vGoal;
+}
+
 math::Vector3 MoveToGoal::moveToGoalSubsumption(double maxSpeed, math::Vector3 currentPosition)
 {
     // Check for goal position

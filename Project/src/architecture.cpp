@@ -197,15 +197,13 @@ namespace gazebo
         // Update Position from GPS.  Could eventually implement Kalman filter
         // Method Variables
         const double earthRad = 6371009; //Radius of the earth in meters
-        gzmsg << "Getting Latitude & Longitude" << endl;
         // Convert GPS to x,y,z
         math::Angle lat = this->_gps->GetLatitude();
         math::Angle lon = this->_gps->GetLongitude();
 
-        gzmsg << "Updating the position" << endl;
         // Update the position
-        _currentPosition = math::Vector3( earthRad*lat.Radian(),
-                                          earthRad*lon.Radian(),
+        _currentPosition = math::Vector3( earthRad*lon.Radian(),
+                                          earthRad*lat.Radian(),
                                           this->_gps->GetAltitude() );
     }
 }
