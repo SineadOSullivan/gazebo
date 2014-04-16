@@ -1,12 +1,15 @@
 #ifndef ARCHITECTURE_H
 #define ARCHITECTURE_H
 
+#include <math.h>
+#include <stdio.h>
 #include <boost/bind.hpp>
+
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <gazebo/sensors/sensors.hh>
-#include <stdio.h>
+
 #include <avoidBoundary.h>
 #include <avoidObstacles.h>
 #include <moveToGoal.h>

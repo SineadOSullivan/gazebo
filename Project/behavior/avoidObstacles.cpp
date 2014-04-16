@@ -18,10 +18,42 @@ math::Vector3 AvoidObstacles::avoidObstaclesSubsumption(sensors::RaySensorPtr li
     return math::Vector3(0.0d, 0.0d, 0.0d);
 }
 
-math::Vector3 AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar)
+void AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar, std::vector< std::vector<double> > & votes, std::vector<double> R, std::vector<double> T)
 {
 
+    // Sensor Parameters
+    const int n = lidar->GetRangeCount(); //T.size
+    const double maxR = lidar->GetRangeMax();
+    const double minR = lidar->GetRangeMin();
+
+    double lRange;
+
+
+    // Loop through Vote matrix
+    for( unsigned int j = 0; j < T.size(); j++ )
+    {
+        // Get sensor data
+        lRange = lidar->GetRange(j);
+
+        // Check for sensor error
+        if( lRange < minR )
+        {
+            lRange = maxR;
+        }
+
+        for( unsigned int i = 0; i < R.size(); i++ )
+        {
+            if( R[i]>lRange)
+            {
+                votes[i][j] += -this->_kGain;
+            }
+
+        }
+    }
 }
+
+
+
 
 math::Vector3 AvoidObstacles::avoidObstaclesMotorSchema(sensors::RaySensorPtr lidar)
 {
