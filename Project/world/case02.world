@@ -1165,7 +1165,7 @@
 
     <model name='ob16'>
       <static>true</static>
-      <pose>7.37 72.60 0.15 0 0 0</pose>
+      <pose>2.37 82.60 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1349,7 +1349,7 @@
 
     <model name='ob20'>
       <static>true</static>
-      <pose>7.80 52.18 0.15 0 0 0</pose>
+      <pose>3.80 52.18 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1628,11 +1628,11 @@
 
   #Robotic Boat
   ##############################################################################
-
-
-
-
-
+  
+  <include>
+    <uri>model://RoboBoat</uri>
+    <pose>4.5 -10.0 0 0 0 0</pose>
+  </include>
 
   ##############################################################################
     

@@ -28,8 +28,8 @@ file(GLOB ARCHITECTURE_SRCS include/architecture.h src/architecture.cpp)
 
 # Subsumbtion
 file(GLOB SUBSUMPTION_SRCS include/subsumption_arch.h src/subsumption_arch.cpp)
-#add_library(subsumption_arch SHARED ${SUBSUMPTION_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
-#target_link_libraries(subsumption_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+add_library(subsumption_arch SHARED ${SUBSUMPTION_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
+target_link_libraries(subsumption_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
 
 # Motor Schema
 file(GLOB MOTOR_SCHEMA_SRCS include/motor_schema_arch.h src/motor_schema_arch.cpp)
@@ -38,5 +38,5 @@ file(GLOB MOTOR_SCHEMA_SRCS include/motor_schema_arch.h src/motor_schema_arch.cp
 
 # DAMN
 file(GLOB DAMN_SRCS include/damn_arch.h src/damn_arch.cpp)
-add_library(damn_arch SHARED ${DAMN_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
-target_link_libraries(damn_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+#add_library(damn_arch SHARED ${DAMN_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
+#target_link_libraries(damn_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})

@@ -1,6 +1,8 @@
 #ifndef ARCHITECTURE_H
 #define ARCHITECTURE_H
 
+//#define LOGGING
+
 #include <math.h>
 #include <stdio.h>
 #include <boost/bind.hpp>

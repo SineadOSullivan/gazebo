@@ -18,7 +18,7 @@ math::Vector3 AvoidObstacles::avoidObstaclesSubsumption(sensors::RaySensorPtr li
     double min_dist = 1e6;
     double max_dist = (0.05d * lidar->GetRangeMax());
     // Loop over range data
-    for(unsigned int i = (lidar->GetRangeCount() / 4); i < (lidar->GetRangeCount() / 4) * 3; i++)
+    for(unsigned int i = (lidar->GetRangeCount() / 3); i < (lidar->GetRangeCount() / 3) * 2; i++)
     {
         if (lidar->GetRange(i) < min_dist)
             min_dist = lidar->GetRange(i);
@@ -84,27 +84,17 @@ math::Vector3 AvoidObstacles::avoidObstaclesSubsumption(sensors::RaySensorPtr li
                 }
             }
         }
+#ifdef LOGGING
         // Longest Segment
         gzmsg << "Segment: " << seg[0] << "," << seg[1] << " = " << segDist << " [" << (seg[0] + seg[1])/2.0d << "]" << endl;
+#endif
         double midPoint = (seg[0] + seg[1])/2.0d;
         // Now let's calculate the vector to this point
         double angle = lidar->GetAngleMin().Radian() + midPoint * lidar->GetAngleResolution();
+#ifdef LOGGING
         gzmsg << "Angle: " << angle << endl;
-        math::Vector3 v(std::cos(angle), std::sin(angle), 0.0d);
-
-        /*
-        // Print the arrays
-        for(int j=0; j < segments.size(); j++)
-        {
-            gzmsg << "Segment: ";
-            for(int a=0; a < segments[j].size(); a++)
-            {
-                gzmsg << segments[j][a] << ",";
-            }
-            gzmsg << endl;
-        }
-        */
-        return v;
+#endif
+        return math::Vector3(std::cos(angle), std::sin(angle), 0.0d);
     }
     // Don't bother considering this behavior
     else

@@ -243,7 +243,10 @@
 		<gain_boundary>1.0</gain_boundary>
 		<gain_noise>0.1</gain_noise>
 
-		<goal>4.5 100 0</goal>
+		<!-- Case 1 Goal -->
+		<!--<goal>4.5 100 0</goal>-->
+		<!-- Case 2 Goal -->
+		<goal>8.5 100 0</goal>
 		<gain_goal>1.0</gain_goal>
 		<max_speed>3.6</max_speed>
 
