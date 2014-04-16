@@ -13,9 +13,30 @@ AvoidBoundary::AvoidBoundary(double kBoundary)
 {
 }
 
-math::Vector3 AvoidBoundary::avoidBoundarySubsumption()
+math::Vector3 AvoidBoundary::avoidBoundarySubsumption(math::Vector2d minimum, math::Vector2d maximum, math::Vector3 currentPosition)
 {
-    return math::Vector3(0.0d, 0.0d, 0.0d);
+    const double boundaryThreshold = 1.0d;
+    // Check for being within minimum threshold
+    if ((currentPosition[0] - minimum[0]) < boundaryThreshold)
+    {
+        return (math::Vector3(1.0d, 0.0d, 0.0d));
+    }
+    else if ((currentPosition[1] - minimum[1]) < boundaryThreshold)
+    {
+        return (math::Vector3(0.0d, 1.0d, 0.0d));
+    }
+    // Check for being within maximum threshold
+    else if ((maximum[0] - currentPosition[0]) < boundaryThreshold)
+    {
+        return (math::Vector3(-1.0d, 0.0d, 0.0d));
+    }
+    else if ((maximum[1] - currentPosition[1]) < boundaryThreshold)
+    {
+        return (math::Vector3(0.0d, -1.0d, 0.0d));
+    }
+    // Nothing to worry about
+    else
+        return math::Vector3(0.0d, 0.0d, 0.0d);
 }
 
 math::Vector3 AvoidBoundary::avoidBoundaryDamn()

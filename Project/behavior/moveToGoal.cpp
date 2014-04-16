@@ -32,11 +32,15 @@ math::Vector3 MoveToGoal::moveToGoalSubsumption(double maxSpeed, math::Vector3 c
         // Get the vector from current position to goal
         math::Vector3 vToGoal = this->_vGoal - currentPosition;
 
-        // Normalize the vector
-        vToGoal = vToGoal.Normalize();
+        // Check to see if length is greater than max speed
+        if (vToGoal.GetLength() > maxSpeed)
+        {
+            // Normalize the vector
+            vToGoal = vToGoal.Normalize();
 
-        // Scale to max speed
-        vToGoal *= maxSpeed;
+            // Scale to max speed
+            vToGoal *= maxSpeed;
+        }
 
         // Return the scaled vector
         return vToGoal;

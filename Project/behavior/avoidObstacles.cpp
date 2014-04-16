@@ -15,7 +15,100 @@ AvoidObstacles::AvoidObstacles(double kAvoid)
 
 math::Vector3 AvoidObstacles::avoidObstaclesSubsumption(sensors::RaySensorPtr lidar)
 {
-    return math::Vector3(0.0d, 0.0d, 0.0d);
+    double min_dist = 1e6;
+    double max_dist = (0.05d * lidar->GetRangeMax());
+    // Loop over range data
+    for(unsigned int i = (lidar->GetRangeCount() / 4); i < (lidar->GetRangeCount() / 4) * 3; i++)
+    {
+        if (lidar->GetRange(i) < min_dist)
+            min_dist = lidar->GetRange(i);
+    }
+
+    // See if we need to care about the obstacles
+    if (min_dist < max_dist)
+    {
+        vector< vector<double> > segments;
+        vector<double> seg;
+        bool previousClear = false;
+        // Loop over the range data to build the line segments
+        for(unsigned int i = (lidar->GetRangeCount() / 3); i < (lidar->GetRangeCount() / 3) * 2; i++)
+        {
+            if (previousClear)
+            {
+                // Check for any areas greater than our max distance
+                if (lidar->GetRange(i) > max_dist)
+                {
+                    previousClear = true;
+                }
+                else
+                {
+                    seg.push_back(i - 1);
+                    segments.push_back(seg);
+                    seg.clear();
+                    previousClear = false;
+                }
+            }
+            else
+            {
+                // Check for any areas greater than our max distance
+                if (lidar->GetRange(i) > max_dist)
+                {
+                    seg.push_back(i);
+                    previousClear = true;
+                }
+            }
+        }
+        // Check to see if we ended on a previous Clear
+        if (previousClear)
+        {
+            // Finish off the segment
+            seg.push_back((lidar->GetRangeCount() / 3) * 2 - 1);
+            segments.push_back(seg);
+            seg.clear();
+            previousClear = false;
+        }
+        double segDist = 0.0d;
+        // Find the maximum segment size
+        for (int j = 0; j < segments.size(); j++)
+        {
+            // Make sure we only have the end points
+            if (segments[j].size() == 2)
+            {
+                // See if the current segment dist is greater
+                if ((segments[j][1] - segments[j][0]) > segDist)
+                {
+                    // Save the distance
+                    segDist = (segments[j][1] - segments[j][0]);
+                    // Save the segment
+                    seg = segments[j];
+                }
+            }
+        }
+        // Longest Segment
+        gzmsg << "Segment: " << seg[0] << "," << seg[1] << " = " << segDist << " [" << (seg[0] + seg[1])/2.0d << "]" << endl;
+        double midPoint = (seg[0] + seg[1])/2.0d;
+        // Now let's calculate the vector to this point
+        double angle = lidar->GetAngleMin().Radian() + midPoint * lidar->GetAngleResolution();
+        gzmsg << "Angle: " << angle << endl;
+        math::Vector3 v(std::cos(angle), std::sin(angle), 0.0d);
+
+        /*
+        // Print the arrays
+        for(int j=0; j < segments.size(); j++)
+        {
+            gzmsg << "Segment: ";
+            for(int a=0; a < segments[j].size(); a++)
+            {
+                gzmsg << segments[j][a] << ",";
+            }
+            gzmsg << endl;
+        }
+        */
+        return v;
+    }
+    // Don't bother considering this behavior
+    else
+        return (math::Vector3(0.0d, 0.0d, 0.0d));
 }
 
 math::Vector3 AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar)

@@ -23,6 +23,9 @@ namespace gazebo
     // Called by the world update start event
     void SubsumptionArch::OnUpdate(const common::UpdateInfo & _info)
     {
+        // Check for Lidar Functionality
+        if (_lidar->GetRange(0) == 0.0d)
+            return;
         // Update the position
         UpdatePosition(_info);
 
@@ -33,7 +36,7 @@ namespace gazebo
         // Get the output for Avoid Obstacle behavior
         math::Vector3 v1 = _avoidObs.avoidObstaclesSubsumption(_lidar);
         // Get the output for Avoid Boundary behavior
-        math::Vector3 v2 = _avoidBdry.avoidBoundarySubsumption();
+        math::Vector3 v2 = _avoidBdry.avoidBoundarySubsumption(math::Vector2d(-10.0d, -50.0d), math::Vector2d(10.0d, 150.0d), _currentPosition);
         // Get the output for Avoid Boundary behavior
         math::Vector3 v3 = _moveToGoal.moveToGoalSubsumption(_maxSpeed, _currentPosition);
         // Check for valid Avoid Obstacle output

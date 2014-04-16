@@ -41,6 +41,11 @@ namespace gazebo
             {
                 // Dynamically cast the pointer
                 this->_lidar = boost::dynamic_pointer_cast<sensors::RaySensor>(sens);
+                // Sensor Parameters
+                gzmsg << "Lidar Range Count: " << _lidar->GetRangeCount() << endl;
+                gzmsg << "Lidar Max Range: " << _lidar->GetRangeMax() << endl;
+                gzmsg << "Lidar Min Range: " << _lidar->GetRangeMin() << endl;
+                gzmsg << "Lidar Angle Resolution: " << _lidar->GetAngleResolution() << endl;
                 return true;
             }
             else
