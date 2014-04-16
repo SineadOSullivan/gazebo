@@ -39,6 +39,13 @@ void DamnArch::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 // Called by the world update start event
 void DamnArch::OnUpdate(const common::UpdateInfo & /*_info*/)
 {
+    // Check if LIDAR has initialized
+    if( this->_lidar->GetRange(0) == 0.0d )
+    {
+        this->_lidar->Init();
+        return;
+    }
+
     // Construct initial vote matrix
     std::vector< std::vector<double> > votes;
         votes.resize(this->R.size());

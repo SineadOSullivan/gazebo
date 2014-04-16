@@ -22,7 +22,6 @@ void AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar, std::vector
 {
 
     // Sensor Parameters
-    const int n = lidar->GetRangeCount(); //T.size
     const double maxR = lidar->GetRangeMax();
     const double minR = lidar->GetRangeMin();
 
