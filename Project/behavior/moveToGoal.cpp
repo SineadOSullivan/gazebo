@@ -47,9 +47,32 @@ math::Vector3 MoveToGoal::moveToGoalSubsumption(double maxSpeed, math::Vector3 c
     }
 }
 
-math::Vector3 MoveToGoal::moveToGoalDamn()
-{
+void MoveToGoal::moveToGoalDamn(math::Vector3 currentPosition, std::vector< std::vector<double> > & votes, std::vector<double> R, std::vector<double> T)
+{    
+    // Method Variables
+    double rMax = R.back();
 
+    // Compute Distance to Goal
+    math::Vector3 toGoal = this->_vGoal - currentPosition;
+    double distToGoal = toGoal.GetLength();
+    double goalHead = atan2( toGoal[1], toGoal[0]);
+
+    // Loop through Vote matrix
+    for( unsigned int i = 0; i < R.size(); i++ )
+    {
+        for( unsigned int j = 0; j < T.size(); j++ )
+        {
+            if( distToGoal > rMax )
+            {
+                // Scale votes between 1 and -1 around heading
+                votes[i][j] += R[i]*( 1 - 2.0*std::abs(goalHead - T[i])/M_PI )/rMax;
+            }
+            else if( R[i] <= distToGoal )
+            {
+                votes[i][j] += R[i]*( 1 - 2.0*std::abs(goalHead - T[i])/M_PI )/distToGoal;
+            }
+        }
+    }
 }
 
 math::Vector3 MoveToGoal::moveToGoalMotorSchema(double maxSpeed, math::Vector3 currentPosition)

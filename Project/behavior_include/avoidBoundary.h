@@ -16,7 +16,7 @@ namespace gazebo
         AvoidBoundary();
         AvoidBoundary(double kBoundary);
         math::Vector3 avoidBoundarySubsumption(math::Vector2d maximum, math::Vector2d minimum, math::Vector3 currentPosition);
-        math::Vector3 avoidBoundaryDamn();
+        void avoidBoundaryDamn(math::Vector3 currentPosition, std::vector< std::vector<double> > & votes, std::vector<double> R, std::vector<double> T);
         math::Vector3 avoidBoundaryMotorSchema(math::Vector3 currentPosition);
     private:
 

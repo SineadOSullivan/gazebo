@@ -1,11 +1,6 @@
 #ifndef DAMN_ARCH_H
 #define DAMN_ARCH_H
 
-#include <boost/bind.hpp>
-#include <gazebo/gazebo.hh>
-#include <gazebo/physics/physics.hh>
-#include <gazebo/common/common.hh>
-#include <stdio.h>
 #include "architecture.h"
 
 namespace gazebo
@@ -25,7 +20,7 @@ namespace gazebo
          */
         void OnUpdate(const common::UpdateInfo &);
     private:
-
+        std::vector<double> R, T;
     };
 
     // Register this plugin with the simulator
