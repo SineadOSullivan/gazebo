@@ -1,5 +1,11 @@
+<?xml version="1.0" ?>
 <sdf version='1.4'>
-  <world name='world2-case0'>
+  <world name='case02-2'>
+
+  #World Settings
+  ##############################################################################
+  
+    #Ambient Lighting
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
       <pose>0 0 10 0 -0 0</pose>
@@ -13,9 +19,11 @@
       </attenuation>
       <direction>-0.5 0.1 -0.9</direction>
     </light>
+
+    #Ground Plane
     <model name='ground_plane'>
-      <static>1</static>
-      <pose>4.5 46 0 0 -0 0</pose>
+      <static>true</static>
+      <pose>4.5 46 0 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -62,18 +70,22 @@
         <gravity>1</gravity>
       </link>
     </model>
+
+    #Physics and World Options
     <physics type='ode'>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
       <gravity>0 0 -9.8</gravity>
     </physics>
+
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
       <shadows>1</shadows>
       <grid>0</grid>
     </scene>
+
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <latitude_deg>0</latitude_deg>
@@ -81,9 +93,10 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
+
     <model name='goal_location'>
-      <static>1</static>
-      <pose>8.5 100 0 0 -0 0</pose>
+      <static>true</static>
+      <pose>7 99 0 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry>
@@ -99,18 +112,18 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
+
+  
+  ##############################################################################    
+
+  #Competition Boundary
+  ##############################################################################  
+    
     <model name='boundary_1'>
-      <static>1</static>
-      <pose>0 0 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>0 0 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -153,9 +166,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+    
     <model name='boundary_2'>
-      <static>1</static>
-      <pose>3 0 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>3 0 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -198,9 +212,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='boundary_3'>
-      <static>1</static>
-      <pose>6 0 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>6 0 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -243,9 +258,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='start_boundary'>
-      <static>1</static>
-      <pose>9 0 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>9 0 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -288,9 +304,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+    
     <model name='boundary_5'>
-      <static>1</static>
-      <pose>0 92 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>0 92 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -333,9 +350,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+    
     <model name='boundary_6'>
-      <static>1</static>
-      <pose>3 92 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>3 92 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -378,9 +396,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='boundary_7'>
-      <static>1</static>
-      <pose>6 92 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>6 92 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -423,9 +442,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='goal_boundary'>
-      <static>1</static>
-      <pose>9 92 0.5 0 -0 0</pose>
+      <static>true</static>
+      <pose>9 92 0.5 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -468,9 +488,16 @@
         <gravity>1</gravity>
       </link>
     </model>
+
+
+  ##############################################################################
+    
+  #Obstacle Bouys
+  ##############################################################################
+
     <model name='ob01'>
-      <static>1</static>
-      <pose>2.36 35.38 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>2.36 35.38 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -512,10 +539,11 @@
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-    </model>
+    </model>  
+  
     <model name='ob02'>
-      <static>1</static>
-      <pose>4.64 73.98 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>4.64 73.98 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -558,9 +586,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob03'>
-      <static>1</static>
-      <pose>6.23 72.23 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>6.23 72.23 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -603,9 +632,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+  
     <model name='ob04'>
-      <static>1</static>
-      <pose>6.43 45.61 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>6.43 45.61 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -648,9 +678,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+  
     <model name='ob05'>
-      <static>1</static>
-      <pose>3.67 50.18 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>3.67 50.18 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -693,9 +724,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+  
     <model name='ob06'>
-      <static>1</static>
-      <pose>2.86 50.96 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>2.86 50.96 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -738,9 +770,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+  
     <model name='ob07'>
-      <static>1</static>
-      <pose>8.4 45.66 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>8.40 45.66 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -783,9 +816,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob08'>
-      <static>1</static>
-      <pose>5.7 75.55 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>5.70 75.55 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -828,9 +862,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob09'>
-      <static>1</static>
-      <pose>0.028 86.17 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>.028 86.17 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -873,9 +908,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob10'>
-      <static>1</static>
-      <pose>1.17 57.32 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>1.17 57.32 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -918,9 +954,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob11'>
-      <static>1</static>
-      <pose>3.99 40.14 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>3.99 40.14 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -963,9 +1000,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+  
     <model name='ob12'>
-      <static>1</static>
-      <pose>3.37 91.08 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>3.37 91.08 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1007,10 +1045,11 @@
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-    </model>
+    </model> 
+  
     <model name='ob13'>
-      <static>1</static>
-      <pose>5.8 70.35 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>5.80 70.35 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1052,10 +1091,11 @@
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-    </model>
+    </model>  
+
     <model name='ob14'>
-      <static>1</static>
-      <pose>5.38 44.8 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>5.38 44.80 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1098,9 +1138,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob15'>
-      <static>1</static>
-      <pose>4.62 26.88 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>4.62 26.88 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1143,9 +1184,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob16'>
-      <static>1</static>
-      <pose>2.37 82.6 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>2.37 82.60 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1188,9 +1230,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob17'>
-      <static>1</static>
-      <pose>5.98 33.36 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>5.98 33.36 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1233,9 +1276,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob18'>
-      <static>1</static>
-      <pose>5.29 35.5 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>5.29 35.50 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1278,9 +1322,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+  
     <model name='ob19'>
-      <static>1</static>
-      <pose>1.35 30.41 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>1.35 30.41 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1323,9 +1368,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob20'>
-      <static>1</static>
-      <pose>3.8 52.18 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>3.80 52.18 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1368,9 +1414,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob21'>
-      <static>1</static>
-      <pose>7.75 19.29 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>7.75 19.29 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1413,9 +1460,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob22'>
-      <static>1</static>
-      <pose>1.11 76.48 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>1.11 76.48 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1458,9 +1506,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob23'>
-      <static>1</static>
-      <pose>6.24 70.84 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>6.24 70.84 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1503,9 +1552,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob24'>
-      <static>1</static>
-      <pose>5.81 67.92 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>5.81 67.92 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1548,9 +1598,10 @@
         <gravity>1</gravity>
       </link>
     </model>
+
     <model name='ob25'>
-      <static>1</static>
-      <pose>6.29 72.62 0.15 0 -0 0</pose>
+      <static>true</static>
+      <pose>6.29 72.62 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1593,595 +1644,19 @@
         <gravity>1</gravity>
       </link>
     </model>
-    <model name='RoboBoat'>
-      <static>0</static>
-      <link name='link'>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-          <mass>1</mass>
-        </inertial>
-        <collision name='hull_col'>
-          <pose>0 0.5 0.1 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.3 1 0.2</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='hull_vis'>
-          <pose>0 0.5 0.1 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.3 1 0.2</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Black</name>
-            </script>
-          </material>
-        </visual>
-        <collision name='top_col'>
-          <pose>0 0.25 0.25 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.8 0.3 0.1</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='top_vis'>
-          <pose>0 0.25 0.25 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.8 0.3 0.1</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-          </material>
-        </visual>
-        <collision name='left_col'>
-          <pose>-0.35 0.3 0.1 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.1 0.6 0.2</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='left_vis'>
-          <pose>-0.35 0.3 0.1 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.1 0.6 0.2</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Black</name>
-            </script>
-          </material>
-        </visual>
-        <collision name='right_col'>
-          <pose>0.35 0.3 0.1 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.1 0.6 0.2</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='right_vis'>
-          <pose>0.35 0.3 0.1 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.1 0.6 0.2</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Black</name>
-            </script>
-          </material>
-        </visual>
-        <sensor name='LIDAR' type='ray'>
-          <pose>0 0.8 0.25 0 -0 1.5708</pose>
-          <always_on>1</always_on>
-          <visualize>1</visualize>
-          <topic>laser_data</topic>
-          <update_rate>10</update_rate>
-          <ray>
-            <scan>
-              <horizontal>
-                <samples>162</samples>
-                <resolution>1</resolution>
-                <min_angle>-2.26893</min_angle>
-                <max_angle>2.26893</max_angle>
-              </horizontal>
-            </scan>
-            <range>
-              <min>0.5</min>
-              <max>20</max>
-              <resolution>0.01</resolution>
-            </range>
-            <noise>
-              <type>gaussian</type>
-              <mean>0</mean>
-              <stddev>0.05</stddev>
-            </noise>
-          </ray>
-        </sensor>
-        <sensor name='IMU' type='imu'>
-          <pose>0 0.25 0.25 0 -0 0</pose>
-          <always_on>1</always_on>
-          <visualize>1</visualize>
-          <topic>__default_topic__</topic>
-          <update_rate>50</update_rate>
-          <imu>
-            <noise>
-              <type>gaussian</type>
-              <rate>
-                <mean>0</mean>
-                <stddev>0.0002</stddev>
-                <bias_mean>7.5e-06</bias_mean>
-                <bias_stddev>8e-07</bias_stddev>
-              </rate>
-              <accel>
-                <mean>0</mean>
-                <stddev>0.017</stddev>
-                <bias_mean>0.1</bias_mean>
-                <bias_stddev>0.001</bias_stddev>
-              </accel>
-            </noise>
-          </imu>
-        </sensor>
-        <sensor name='GPS' type='gps'>
-          <pose>0 0.5 0.1 0 -0 0</pose>
-          <always_on>1</always_on>
-          <visualize>0</visualize>
-          <topic>gps_data</topic>
-          <update_rate>10</update_rate>
-          <gps>
-            <position_sensing>
-              <horizontal>
-                <noise type='gaussian'>
-                  <mean>0</mean>
-                  <stddev>1.5</stddev>
-                </noise>
-              </horizontal>
-              <vertical>
-                <noise type='gaussian'>
-                  <mean>0</mean>
-                  <stddev>3</stddev>
-                </noise>
-              </vertical>
-            </position_sensing>
-            <velocity_sensing>
-              <horizontal>
-                <noise type='gaussian'>
-                  <mean>0</mean>
-                  <stddev>0.005</stddev>
-                </noise>
-              </horizontal>
-              <vertical>
-                <noise type='gaussian'>
-                  <mean>0</mean>
-                  <stddev>0.01</stddev>
-                </noise>
-              </vertical>
-            </velocity_sensing>
-          </gps>
-        </sensor>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-<plugin name="motor_schema_arch" filename="libmotor_schema_arch.so">
-		<gain_avoid>0.1</gain_avoid>
-		<gain_boundary>0.5</gain_boundary>
-		<gain_noise>0.05</gain_noise>
-                <gain_open>0.1</gain_open>
-		<gain_goal>1.0</gain_goal>
 
-		<max_speed>3.6</max_speed>
-		<lidar>LIDAR</lidar>
-		<imu>IMU</imu>
-		<gps>GPS</gps>
 
-                <output>SimulationOutput.txt</output>
-	</plugin>
-      <pose>4.5 -10 0 0 -0 0</pose>
-    </model>
-    <state world_name='case02-0'>
-      <sim_time>0 0</sim_time>
-      <real_time>0 0</real_time>
-      <wall_time>1397720477 757464519</wall_time>
-      <model name='RoboBoat'>
-        <pose>4.5 -10 0 0 -0 0</pose>
-        <link name='link'>
-          <pose>4.5 -10 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='boundary_1'>
-        <pose>0 0 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>0 0 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='boundary_2'>
-        <pose>3 0 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>3 0 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='boundary_3'>
-        <pose>6 0 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>6 0 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='boundary_5'>
-        <pose>0 92 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>0 92 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='boundary_6'>
-        <pose>3 92 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>3 92 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='boundary_7'>
-        <pose>6 92 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>6 92 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='goal_boundary'>
-        <pose>9 92 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>9 92 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='goal_location'>
-        <pose>8.5 100 0 0 -0 0</pose>
-        <link name='link'>
-          <pose>8.5 100 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ground_plane'>
-        <pose>4.5 46 0 0 -0 0</pose>
-        <link name='link'>
-          <pose>4.5 46 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob01'>
-        <pose>2.36 35.38 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>2.36 35.38 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob02'>
-        <pose>9.669 78.2986 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>9.669 78.2986 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob03'>
-        <pose>7.26472 72.23 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>7.26472 72.23 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob04'>
-        <pose>7.76 45.63 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>7.76 45.63 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob05'>
-        <pose>5.30721 50.18 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>5.30721 50.18 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob06'>
-        <pose>2.3524 50.96 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>2.3524 50.96 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob07'>
-        <pose>8.40992 45.676 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>8.40992 45.676 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob08'>
-        <pose>5.7 75.55 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>5.7 75.55 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob09'>
-        <pose>0.028 86.17 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>0.028 86.17 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob10'>
-        <pose>1.17 60.4532 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>1.17 60.4532 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob11'>
-        <pose>3.99 40.14 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>3.99 40.14 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob12'>
-        <pose>3.37 91.08 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>3.37 91.08 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob13'>
-        <pose>5.8 70.35 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>5.8 70.35 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob14'>
-        <pose>2.31399 43.9417 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>2.31399 43.9417 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob15'>
-        <pose>4.62 26.88 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>4.62 26.88 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob16'>
-        <pose>2.37 82.6 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>2.37 82.6 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob17'>
-        <pose>8.49548 33.36 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>8.49548 33.36 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob18'>
-        <pose>5.29 35.5 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>5.29 35.5 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob19'>
-        <pose>1.35 30.41 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>1.35 30.41 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob20'>
-        <pose>7.80967 54.871 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>7.80967 54.871 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob21'>
-        <pose>7.75 19.29 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>7.75 19.29 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob22'>
-        <pose>1.11 76.48 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>1.11 76.48 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob23'>
-        <pose>-0.224319 70.84 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>-0.224319 70.84 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob24'>
-        <pose>6.52592 65.6469 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>6.52592 65.6469 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ob25'>
-        <pose>3.62879 68.2456 0.15 0 -0 0</pose>
-        <link name='link'>
-          <pose>3.62879 68.2456 0.15 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='start_boundary'>
-        <pose>9 0 0.5 0 -0 0</pose>
-        <link name='link'>
-          <pose>9 0 0.5 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-    </state>
-    <gui fullscreen='0'>
-      <camera name='user_camera'>
-        <pose>16.0974 -36.6059 16.6908 0 0.343643 1.7402</pose>
-        <view_controller>orbit</view_controller>
-      </camera>
-    </gui>
+  ##############################################################################
+
+  #Robotic Boat
+  ##############################################################################
+  
+  <include>
+    <uri>model://RoboBoat</uri>
+    <pose>3.2 -7.0 0 0 0 0</pose>
+    <start_bound>yep</start_bound>
+  </include>
+
+  ##############################################################################
   </world>
 </sdf>

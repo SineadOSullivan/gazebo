@@ -5,12 +5,9 @@ using namespace std;
 
 void DamnArch::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 {
-    // Store the pointer to the model
-    this->_model = _parent;
-
     // Initialize Architecture
     // Initialize this architecture
-    if (this->initialize(_sdf))
+    if (this->initialize("DAMN", _parent, _sdf))
     {
         gzmsg << "Successfully loaded parameters!" << endl;
 
@@ -44,6 +41,8 @@ void DamnArch::OnUpdate(const common::UpdateInfo & _info)
 
     // Update Position
     this->UpdatePosition(_info);
+    // Check Metrics
+    CheckMetrics();
 
     // Construct initial vote matrix
     std::vector< std::vector<double> > votes;

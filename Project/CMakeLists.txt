@@ -44,5 +44,5 @@ target_link_libraries(motor_schema_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
 
 # DAMN
 file(GLOB DAMN_SRCS include/damn_arch.h src/damn_arch.cpp)
-#add_library(damn_arch SHARED ${DAMN_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
-#target_link_libraries(damn_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+add_library(damn_arch SHARED ${DAMN_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
+target_link_libraries(damn_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
