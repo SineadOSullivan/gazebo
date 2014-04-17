@@ -13,6 +13,11 @@ Noise::Noise(double kNoise)
 {
 }
 
+double Noise::getNoise()
+{
+    return this->_kGain*_rand.GetDblNormal();
+}
+
 math::Vector3 Noise::addNoise()
 {
     gzmsg << "AddNoise" << endl;

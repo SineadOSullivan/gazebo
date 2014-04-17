@@ -18,7 +18,7 @@ math::Vector3 AvoidBoundary::avoidBoundarySubsumption()
     return math::Vector3(0.0d, 0.0d, 0.0d);
 }
 
-void AvoidBoundary::avoidBoundaryDamn(math::Vector3 currentPosition, std::vector< std::vector<double> > & votes, std::vector<double> R, std::vector<double> T)
+void AvoidBoundary::avoidBoundaryDamn(math::Vector3 currentPosition, std::vector< std::vector<double> >& votes, std::vector<double>& R, std::vector<double>& T)
 {
     // Method Variables
     double width = 9.0;
@@ -29,14 +29,14 @@ void AvoidBoundary::avoidBoundaryDamn(math::Vector3 currentPosition, std::vector
     {
         for( unsigned int j = 0; j < T.size(); j++ )
         {
-            if( R[i]*cos(T[i]) >= width-x )
+            if( R[i]*cos(T[j]) >= 0.95*width-x || R[i]*cos(M_PI-T[j]) >= x-0.05*width )     // Boundary cross condition
             {
-                votes[i][j] += -this->_kGain;
+                votes[i][j] -= this->_kGain;
             }
-            else if( R[i]*cos(M_PI-T[i]) >= x )
+            else if( R[i]*cos(T[j]) <= 0.8*width-x || R[i]*cos(M_PI-T[j]) <= x-0.2*width )  // Interior condition
             {
-                votes[i][j] += -this->_kGain;
-            }
+                votes[i][j] += 0.5;
+            }         
         }
     }
 }

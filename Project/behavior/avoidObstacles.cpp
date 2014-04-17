@@ -18,35 +18,38 @@ math::Vector3 AvoidObstacles::avoidObstaclesSubsumption(sensors::RaySensorPtr li
     return math::Vector3(0.0d, 0.0d, 0.0d);
 }
 
-void AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar, std::vector< std::vector<double> > & votes, std::vector<double> R, std::vector<double> T)
+void AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar, std::vector< std::vector<double> >& votes, std::vector<double>& R, std::vector<double>& T)
 {
+    // Model Parameter for avoid distance
+    int N = T.size();
+    double dAvoid = 0.5;    // Avoidance distance
 
-    // Sensor Parameters
-    const double maxR = lidar->GetRangeMax();
-    const double minR = lidar->GetRangeMin();
-
+    // Method Variables
+    int kOff;               // Offset for avoid distance
     double lRange;
 
-
-    // Loop through Vote matrix
-    for( unsigned int j = 0; j < T.size(); j++ )
+    // Loop over each bearing
+    for( int j = 0; j < N; j++ )
     {
         // Get sensor data
         lRange = lidar->GetRange(j);
+        kOff = std::ceil( atan2(dAvoid,lRange) / lidar->GetAngleResolution() );
 
-        // Check for sensor error
-        if( lRange < minR )
+        // Loop over all ranges for that bearing
+        for( int i = 0; i < R.size(); i++ )
         {
-            lRange = maxR;
-        }
-
-        for( unsigned int i = 0; i < R.size(); i++ )
-        {
-            if( R[i]>lRange)
+            if( R[i] >= lRange - dAvoid && lRange < 4.0 )
             {
-                votes[i][j] += -this->_kGain;
+                // Loop over the offset
+                for( int k = std::max(0, j-kOff); k < std::min(N, j+kOff); k++)
+                {
+                    votes[i][k] -= this->_kGain;
+                }
             }
-
+            else if ( lRange > 10.0 )
+            {
+                votes[i][j] += ( R[i]*lRange / 160 );
+            }
         }
     }
 }
