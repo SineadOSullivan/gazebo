@@ -253,7 +253,8 @@
 		<!-- Case 1 Goal -->
 		<!--<goal>4.5 100 0</goal>-->
 		<!-- Case 2 Goal -->
-		<goal>8.5 100 0</goal>
+		<!--<goal>8.5 100 0</goal>-->
+                <output>SimulationOutput.txt</output>
 		<gain_goal>1.0</gain_goal>
 		<max_speed>3.6</max_speed>
 

@@ -9,7 +9,7 @@ namespace gazebo
         gzmsg << "Loading Subsumption Architecture plugin..." << endl;
 
         // Initialize this architecture
-        if (this->initialize(_parent, _sdf))
+        if (this->initialize("Subsumption", _parent, _sdf))
         {
             gzmsg << "Successfully loaded parameters!" << endl;
             // Listen to the update event. This event is broadcast every

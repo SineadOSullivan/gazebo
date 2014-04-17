@@ -3,15 +3,16 @@
 using namespace std;
 namespace gazebo
 {
-    bool Architecture::initialize(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
+    bool Architecture::initialize(std::string architectureName, physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
         gzmsg << "Initializing the architecture" << endl;
+        this->_archName = architectureName;
         this->_model = _parent;
-        return (this->LoadLIDAR(_sdf) &&
+        return (this->LoadMetrics() &&
+                this->LoadLIDAR(_sdf) &&
                 this->LoadGPS(_sdf) &&
                 this->LoadIMU(_sdf) &&
-                this->LoadParams(_sdf) &&
-                this->LoadMetrics());
+                this->LoadParams(_sdf));
     }
 
     bool Architecture::LoadMetrics()
@@ -25,6 +26,11 @@ namespace gazebo
         physics::ModelPtr goal = _model->GetWorld()->GetModel("goal_boundary");
         this->_goalBound = goal->GetWorldPose().pos[1];
         gzmsg << "Goal Bound: " << this->_goalBound << endl;
+
+        // Load goal location
+        physics::ModelPtr goalLocation = _model->GetWorld()->GetModel("goal_location");
+        this->_goalLocation = goalLocation->GetWorldPose().pos;
+        gzmsg << "Goal: " << this->_goalLocation << endl;
 
         // Set times to invalid
         _startTime.Set(-1.0d);
@@ -191,12 +197,22 @@ namespace gazebo
             return false;
         }
 
+        if( _sdf->HasElement("output") )
+        {
+            gzmsg << "Output: " << _sdf->GetElement("output")->Get<std::string>() << endl;
+            this->_outputLocation = _sdf->GetElement("output")->Get<std::string>();
+        }
+        else
+        {
+            gzwarn << "No output parameter defined, defaulting to 'Output.txt'" << endl;
+            this->_outputLocation = "Output.txt";
+        }
+
         // Load Goal Coordinate
-        if( _sdf->HasElement("goal") && _sdf->HasElement("gain_goal") )
+        if( _sdf->HasElement("gain_goal") )
         {
             gzmsg << "Goal Gain: " << _sdf->GetElement("gain_goal")->Get<double>() << endl;
-            gzmsg << "Goal: " << _sdf->GetElement("goal")->Get<math::Vector3>() << endl;
-            this->_moveToGoal = MoveToGoal(_sdf->GetElement("gain_goal")->Get<double>(), _sdf->GetElement("goal")->Get<math::Vector3>());
+            this->_moveToGoal = MoveToGoal(_sdf->GetElement("gain_goal")->Get<double>(), this->_goalLocation);
         }
         else
         {
@@ -251,20 +267,38 @@ namespace gazebo
             _executionTime = (this->_goalTime - this->_startTime);
             gzmsg << "Total Time: " << _executionTime.sec << "." << _executionTime.nsec << " seconds" << endl;
             gzmsg << "Distance Traveled: " << _distanceTraveled << endl;
+
+            try
+            {
+                // Save out the data
+                ofstream outputFile;
+                outputFile.open(_outputLocation.c_str(), ios::out | ios::app);
+                // Save the World Name
+                outputFile << _model->GetWorld()->GetName() << " ";
+                // Save the Architecture
+                outputFile << _archName << " ";
+                // Save the Execution Time
+                outputFile << _executionTime.sec << "." << _executionTime.nsec << " ";
+                // Save the Distance Traveled
+                outputFile << _distanceTraveled << " ";
+                // Save the Average speed
+                outputFile << (_distanceTraveled / _executionTime.sec) << " ";
+                // End the line
+                outputFile << endl;
+                // Close the file
+                outputFile.close();
+            }
+            catch(int e){}
         }
 
         // Only track changes in position if we have started but not finished
         if (_startTime.sec != -1.0d && _goalTime.sec == -1.0d)
         {
-            // Check to see if the previous location is valid
-            //if (_previousLocation != math::Vector3(0.0d, 0.0d, 0.0d))
-            //{
-                // Get the delta change
-                _distanceTraveled += _model->GetWorldPose().pos.Distance(_previousLocation);
+            // Get the delta change
+            _distanceTraveled += _model->GetWorldPose().pos.Distance(_previousLocation);
 
-                // Save the current location as the previous
-                _previousLocation = _model->GetWorldPose().pos;
-            //}
+            // Save the current location as the previous
+            _previousLocation = _model->GetWorldPose().pos;
         }
     }
 }
