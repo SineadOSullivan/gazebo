@@ -1,6 +1,8 @@
 #ifndef BEHAVIOR_H
 #define BEHAVIOR_H
 
+//#define LOGGING
+
 #include <math.h>
 #include <stdio.h>
 #include <boost/bind.hpp>

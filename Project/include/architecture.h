@@ -1,6 +1,8 @@
 #ifndef ARCHITECTURE_H
 #define ARCHITECTURE_H
 
+//#define LOGGING
+
 #include <math.h>
 #include <stdio.h>
 #include <boost/bind.hpp>
@@ -20,7 +22,7 @@ namespace gazebo
     class Architecture
     {
     public:
-        bool initialize(sdf::ElementPtr _sdf);
+        bool initialize(std::string architectureName, physics::ModelPtr _parent, sdf::ElementPtr _sdf);
     protected:
         /**
          * @brief LoadIMU
@@ -47,11 +49,15 @@ namespace gazebo
          */
         bool LoadParams(sdf::ElementPtr _sdf);
 
+        bool LoadMetrics();
+
         /**
          * @brief UpdatePosition
          * @param _info
          */
         void UpdatePosition(const common::UpdateInfo & _info);
+
+        void CheckMetrics();
 
         /**
          * Pointer to the model
@@ -99,7 +105,16 @@ namespace gazebo
         double _maxSpeed;
 
     private:
-
+        std::string _archName;
+        std::string _outputLocation;
+        double _startBound;
+        double _goalBound;
+        common::Time _startTime;
+        common::Time _goalTime;
+        common::Time _executionTime;
+        math::Vector3 _goalLocation;
+        math::Vector3 _previousLocation;
+        double _distanceTraveled;
     };
 }
 #endif

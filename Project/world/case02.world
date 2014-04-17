@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version='1.4'>
-  <world name='competition'>
+  <world name='case02'>
 
   #World Settings
   ##############################################################################
@@ -57,7 +57,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Blue</name>
+              <name>Gazebo/SkyBlue</name>
             </script>
           </material>
         </visual>
@@ -83,6 +83,7 @@
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
       <shadows>1</shadows>
+      <grid>0</grid>
     </scene>
 
     <spherical_coordinates>
@@ -92,6 +93,27 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
+
+    <model name='goal_location'>
+      <static>true</static>
+      <pose>8.5 100 0 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/GreenGlow</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
 
   
   ##############################################################################    
@@ -237,7 +259,7 @@
       </link>
     </model>
 
-    <model name='boundary_4'>
+    <model name='start_boundary'>
       <static>true</static>
       <pose>9 0 0.5 0 0 0</pose>
       <link name='link'>
@@ -421,7 +443,7 @@
       </link>
     </model>
 
-    <model name='boundary_8'>
+    <model name='goal_boundary'>
       <static>true</static>
       <pose>9 92 0.5 0 0 0</pose>
       <link name='link'>
@@ -1165,7 +1187,7 @@
 
     <model name='ob16'>
       <static>true</static>
-      <pose>7.37 72.60 0.15 0 0 0</pose>
+      <pose>2.37 82.60 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1349,7 +1371,7 @@
 
     <model name='ob20'>
       <static>true</static>
-      <pose>7.80 52.18 0.15 0 0 0</pose>
+      <pose>3.80 52.18 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1628,14 +1650,13 @@
 
   #Robotic Boat
   ##############################################################################
-
-
-
-
-
+  
+  <include>
+    <uri>model://RoboBoat</uri>
+    <pose>4.5 -10.0 0 0 0 0</pose>
+    <start_bound>yep</start_bound>
+  </include>
 
   ##############################################################################
-    
-  
   </world>
 </sdf>

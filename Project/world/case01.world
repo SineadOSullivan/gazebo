@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version='1.4'>
-  <world name='competition'>
+  <world name='case01'>
 
   #World Settings
   ##############################################################################
@@ -57,7 +57,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Blue</name>
+              <name>Gazebo/Red</name>
             </script>
           </material>
         </visual>
@@ -92,6 +92,27 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
+
+    <model name='goal_location'>
+      <static>true</static>
+      <pose>4.5 100 0 0 0 0</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/GreenGlow</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
 
   
   ##############################################################################    
@@ -186,7 +207,7 @@
       </link>
     </model>
 
-    <model name='boundary_4'>
+    <model name='start_boundary'>
       <static>true</static>
       <pose>9 0 0.5 0 0 0</pose>
       <link name='link'>
@@ -302,7 +323,7 @@
       </link>
     </model>
 
-    <model name='boundary_8'>
+    <model name='goal_boundary'>
       <static>true</static>
       <pose>9 92 0.5 0 0 0</pose>
       <link name='link'>
