@@ -224,58 +224,39 @@
             </vertical>
           </velocity_sensing>
         </gps>
-
       </sensor>
 
-        <sensor name='CONTACT' type='contact'>
-	  <!--<plugin name="collision_plugin" filename="libcollision_plugin.so">-->
-          <contact>
-            <collision>hull_col</collision>
-            <collision>top_col</collision>
-            <collision>left_col</collision>
-            <collision>right_col</collision>
-          </contact>
-        </sensor>
-
     </link>
-  
-    	<!---Add Joints--->
-
-
     	<!--Add Controller Script-->
-    	<!--<plugin name="NAME" filename="build/model_name.so"/>-->
 
 	<plugin name="subsumption_arch" filename="libsubsumption_arch.so">
 		<gain_avoid>5.0</gain_avoid>
 		<gain_boundary>1.0</gain_boundary>
 		<gain_noise>0.1</gain_noise>
-
-		<!-- Case 1 Goal -->
-		<!--<goal>4.5 100 0</goal>-->
-		<!-- Case 2 Goal -->
-		<!--<goal>8.5 100 0</goal>-->
-                <output>SimulationOutput.txt</output>
 		<gain_goal>1.0</gain_goal>
-		<max_speed>3.6</max_speed>
 
+		<max_speed>3.6</max_speed>
 		<lidar>LIDAR</lidar>
 		<imu>IMU</imu>
 		<gps>GPS</gps>
+
+                <output>SimulationOutput.txt</output>
 	</plugin>
 
 <!--
 	<plugin name="motor_schema_arch" filename="libmotor_schema_arch.so">
 		<gain_avoid>0.1</gain_avoid>
-		<gain_boundary>1.0</gain_boundary>
-		<gain_noise>0.1</gain_noise>
-
-		<goal>4.5 100 0</goal>
+		<gain_boundary>0.5</gain_boundary>
+		<gain_noise>0.05</gain_noise>
+                <gain_open>0.1</gain_open>
 		<gain_goal>1.0</gain_goal>
-		<max_speed>3.6</max_speed>
 
+		<max_speed>3.6</max_speed>
 		<lidar>LIDAR</lidar>
 		<imu>IMU</imu>
 		<gps>GPS</gps>
+
+                <output>SimulationOutput.txt</output>
 	</plugin>
 -->
 <!--
@@ -283,14 +264,14 @@
 		<gain_avoid>5.0</gain_avoid>
 		<gain_boundary>1.0</gain_boundary>
 		<gain_noise>0.1</gain_noise>
-
-		<goal>4.5 100 0</goal>
 		<gain_goal>1.0</gain_goal>
-		<max_speed>3.6</max_speed>
 
+		<max_speed>3.6</max_speed>
 		<lidar>LIDAR</lidar>
 		<imu>IMU</imu>
 		<gps>GPS</gps>
+
+                <output>SimulationOutput.txt</output>
 	</plugin>
 -->
   </model>

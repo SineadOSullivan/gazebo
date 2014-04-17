@@ -77,7 +77,6 @@ void MoveToGoal::moveToGoalDamn(math::Vector3 currentPosition, std::vector< std:
 
 math::Vector3 MoveToGoal::moveToGoalMotorSchema(double maxSpeed, math::Vector3 currentPosition)
 {
-    gzmsg << "MoveToGoal - Motor Schema" << endl;
     // Method Variables
     double closeEnough = maxSpeed;
     double distToGoal;

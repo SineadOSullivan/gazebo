@@ -216,8 +216,8 @@ namespace gazebo
         }
         else
         {
-            gzerr << "No goal and gain_goal parameter defined" << endl;
-            return false;
+            gzwarn << "No gain_goal parameter defined, defaulting to 1.0" << endl;
+            this->_moveToGoal = MoveToGoal(1.0d, this->_goalLocation);
         }
 
         // Load Maximum Speed
@@ -255,13 +255,13 @@ namespace gazebo
         if (_startTime.sec == -1.0d && _currentPosition[1] >= _startBound)
         {
             // Clock the start time
-            this->_startTime = this->_model->GetWorld()->GetRealTime();
+            this->_startTime = this->_model->GetWorld()->GetSimTime();
             gzmsg << "Start Time: " << this->_startTime.sec << "." << this->_startTime.nsec << endl;
         }
         else if (_goalTime.sec == -1.0d && _currentPosition[1] >= _goalBound)
         {
             // Clock the goal time
-            this->_goalTime = this->_model->GetWorld()->GetRealTime();
+            this->_goalTime = this->_model->GetWorld()->GetSimTime();
             gzmsg << "Stop Time: " << this->_goalTime.sec << "." << this->_goalTime.nsec << endl;
             // Calculate the execution time
             _executionTime = (this->_goalTime - this->_startTime);

@@ -135,64 +135,54 @@ void AvoidObstacles::avoidObstaclesDamn(sensors::RaySensorPtr lidar, std::vector
     }
 }
 
-
-
-
-math::Vector3 AvoidObstacles::avoidObstaclesMotorSchema(sensors::RaySensorPtr lidar)
+math::Vector3 AvoidObstacles::avoidObstaclesMotorSchema(physics::ModelPtr model, sensors::RaySensorPtr lidar, double kOpen)
 {
-    gzmsg << "Avoid Obstacles - Motor Schema" << endl;
     // Sensor Parameters
     const int n = lidar->GetRangeCount();
-    gzmsg << "N: " << n << endl;
-    const double maxR = lidar->GetRangeMax();
-    gzmsg << "MaxR: " << maxR << endl;
     const double minR = lidar->GetRangeMin();
-    gzmsg << "MinR: " << minR << endl;
+    const double maxR = lidar->GetRangeMax();
+
+    const double minA = (lidar->GetAngleMin()).Radian();
+    const double maxA = (lidar->GetAngleMax()).Radian();
     const double res = lidar->GetAngleResolution();
-    gzmsg << "Res: " << res << endl;
 
-    gzmsg << "Initialize method variables" << endl;
     // Method Variables
-    double mag = 0.0;
-    double angle = (lidar->GetAngleMin()).Radian();
+    double range, mag = 0.0;
+    double angle = minA;
 
-    //std::vector<double> ranges(n);
+    math::Pose P = model->GetWorldPose().GetInverse();
     math::Vector3 V = math::Vector3(0, 0, 0);
 
-    /*
-    gzmsg << "Update Sensor Data" << endl;
-    gzmsg << "Ranges: " << ranges.size() << endl;
-    // Update Sensor Data
-    lidar->GetRanges(ranges);
-    gzmsg << "NewRanges: " << ranges.size() << endl;
-    */
-
     // Loop over range data
-    for( unsigned int i=0; i < lidar->GetRangeCount(); i++ )
+    for( unsigned int i=0; i < n; i++ )
     {
-        //Check for minimum range
-        if( lidar->GetRange(i) < minR )//ranges[i] < minR )
+        // Get Range Data
+        range = lidar->GetRange(i);
+
+        // Compute Magnitude
+        if( range > minR && range < 0.1*maxR )
         {
-            gzmsg << "Range below the minimum..." << endl;
-            //ranges[i] = maxR;
+            mag = -_kGain/pow(range - minR, 2);
+        }
+        else if( range > 0.5*maxR )
+        {
+            mag = kOpen*range;
         }
 
-        // Compute Repulsion Magnitude
-        if(lidar->GetRange(i) < 0.95 * maxR)//ranges[i] < 0.95 * maxR)
-        {
-            mag = _kGain / pow(lidar->GetRange(i) - 0.95 * minR, 2);//ranges[i] - 0.95 * minR, 2);
-        }
-        else
-        {
-            mag = 0.0;
-        }
-
-        // Subtract repulsing velocity
-        V -= mag * math::Vector3(cos(angle), sin(angle), 0);
+        // Add to velocity along range bearing
+        V += mag*math::Vector3( cos(angle), sin(angle), 0 );
 
         //Increment angle for next range
         angle += res;
     }
+
+    // Correction factor for velocity bias
+    V -= math::Vector3(kOpen*maxR*(sin(maxA) - sin(minA))/res, 0, 0);
+
+    // Rotate Velocity into global frame
+    P.Set(V, P.rot);
+    P.RotatePositionAboutOrigin(P.rot);
+    V = P.pos;
 
     // Return Result
     return V;

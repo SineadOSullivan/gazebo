@@ -64,26 +64,27 @@ void AvoidBoundary::avoidBoundaryDamn(math::Vector3 currentPosition, std::vector
 
 math::Vector3 AvoidBoundary::avoidBoundaryMotorSchema(math::Vector3 currentPosition)
 {
-    gzmsg << "Avoid Boundary - Motor Schema" << endl;
     /**Assume the boundary is given by a box oriented along the Y axis**/
-    // Method Variables
-    double width = 9.0;                     // X-width of the boundary
-    double x = currentPosition[0];          // Current X position
+    // Fixed Parameters
+    const double thresh = 0.25;		// threshold fraction
+    const double width = 9.0;		// X-width of the boundary
 
+    // Method Variables
+    double x = currentPosition[0];		// Current X position
     math::Vector3 V = math::Vector3(0,0,0);
 
     //Check boundary condition
     if( x <= 0 || x >= width )
     {
-        V.Set( -_kGain*( x - 0.5*width ), 0, 0 );
+        V.Set( -10*_kGain*( x - 0.5*width ), 0, 0 );
     }
-    else if( x < width/2 )
+    else if( x < thresh*width )
     {
-        V.Set( _kGain/x, 0, 0 );
+        V.Set( _kGain/pow(x-0.05*width,2), 0, 0 );
     }
-    else
+    else if( x > (1-thresh)*width )
     {
-        V.Set( -_kGain/(x-width), 0, 0 );
+        V.Set( -_kGain/pow(x-0.95*width,2), 0, 0 );
     }
 
     // Return Result

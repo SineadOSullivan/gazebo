@@ -18,7 +18,7 @@ namespace gazebo
 
         math::Vector3 avoidObstaclesSubsumption(sensors::RaySensorPtr lidar);
         void avoidObstaclesDamn(sensors::RaySensorPtr lidar, std::vector< std::vector<double> > & votes, std::vector<double> R, std::vector<double> T);
-        math::Vector3 avoidObstaclesMotorSchema(sensors::RaySensorPtr lidar);
+        math::Vector3 avoidObstaclesMotorSchema(physics::ModelPtr model, sensors::RaySensorPtr lidar, double kOpen);
     private:
 
     };

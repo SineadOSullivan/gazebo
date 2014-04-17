@@ -38,21 +38,10 @@ namespace gazebo
         bool LoadParams(sdf::ElementPtr _sdf);
 
     private:
-        // Model Parameters
-        /**
-         * GPS Coords of the Goal
-         * @brief goalGPS
-         */
-        sdf::Vector3 goalGPS;
-        /**
-         * Maximum Model Speed
-         * @brief maxSpeed
-         */
-        double maxSpeed;
-
         // Control Gains
         double kAvoid;
         double kGoal;
+        double kOpen;
         double kBoundary;
     };
 
