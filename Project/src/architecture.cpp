@@ -29,6 +29,8 @@ namespace gazebo
         // Set times to invalid
         _startTime.Set(-1.0d);
         _goalTime.Set(-1.0d);
+        _executionTime.Set(-1.0d);
+        _previousLocation = _model->GetWorldPose().pos;
     }
 
     bool Architecture::LoadLIDAR(sdf::ElementPtr _sdf)
@@ -246,8 +248,23 @@ namespace gazebo
             this->_goalTime = this->_model->GetWorld()->GetRealTime();
             gzmsg << "Stop Time: " << this->_goalTime.sec << "." << this->_goalTime.nsec << endl;
             // Calculate the execution time
-            common::Time tm = (this->_goalTime - this->_startTime);
-            gzmsg << "Total Time: " << tm.sec << "." << tm.nsec << " seconds" << endl;
+            _executionTime = (this->_goalTime - this->_startTime);
+            gzmsg << "Total Time: " << _executionTime.sec << "." << _executionTime.nsec << " seconds" << endl;
+            gzmsg << "Distance Traveled: " << _distanceTraveled << endl;
+        }
+
+        // Only track changes in position if we have started but not finished
+        if (_startTime.sec != -1.0d && _goalTime.sec == -1.0d)
+        {
+            // Check to see if the previous location is valid
+            //if (_previousLocation != math::Vector3(0.0d, 0.0d, 0.0d))
+            //{
+                // Get the delta change
+                _distanceTraveled += _model->GetWorldPose().pos.Distance(_previousLocation);
+
+                // Save the current location as the previous
+                _previousLocation = _model->GetWorldPose().pos;
+            //}
         }
     }
 }

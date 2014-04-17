@@ -109,6 +109,10 @@ namespace gazebo
         double _goalBound;
         common::Time _startTime;
         common::Time _goalTime;
+        common::Time _executionTime;
+
+        math::Vector3 _previousLocation;
+        double _distanceTraveled;
     };
 }
 #endif
