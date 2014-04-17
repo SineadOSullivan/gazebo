@@ -15,6 +15,7 @@ namespace gazebo
     public:
         Noise();
         Noise(double kNoise);
+        double getNoise();
         math::Vector3 addNoise();
     private:
         math::Rand _rand;

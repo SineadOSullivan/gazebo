@@ -37,14 +37,13 @@ void DamnArch::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 }
 
 // Called by the world update start event
-void DamnArch::OnUpdate(const common::UpdateInfo & /*_info*/)
+void DamnArch::OnUpdate(const common::UpdateInfo & _info)
 {
-    // Check if LIDAR has initialized
-    if( this->_lidar->GetRange(0) == 0.0d )
-    {
-        this->_lidar->Init();
-        return;
-    }
+    // Wait for LIDAR
+    while( this->_lidar->GetRange(0) == 0.0d ) return;
+
+    // Update Position
+    this->UpdatePosition(_info);
 
     // Construct initial vote matrix
     std::vector< std::vector<double> > votes;
@@ -55,18 +54,22 @@ void DamnArch::OnUpdate(const common::UpdateInfo & /*_info*/)
         }
 
     // Run Behaviors
+    this->_moveToGoal.moveToGoalDamn(this->_currentPosition, votes, this->R, this->T);
     this->_avoidBdry.avoidBoundaryDamn(this->_currentPosition, votes, this->R, this->T);
     this->_avoidObs.avoidObstaclesDamn(this->_lidar, votes, this->R, this->T);
-    this->_moveToGoal.moveToGoalDamn(this->_currentPosition, votes, this->R, this->T);
 
     //  Find Maximum Vote
-    unsigned int rS, tS;    // Selected R and Theta
+    double rS, tS;    // Selected R and Theta
     double maxVote = -100;  // current maximum vote
 
-    for( unsigned int i = 0; i<this->R.size(); i++ )
+    for( unsigned int i = 0; i < this->R.size(); i++ )
     {
         for( unsigned int j = 0; j < this->T.size(); j++ )
         {
+            // Add Some Noise
+            votes[i][j] += this->_noise.getNoise();
+
+            //Check Vote
             if( votes[i][j] > maxVote )
             {
                 maxVote = votes[i][j];
@@ -76,10 +79,26 @@ void DamnArch::OnUpdate(const common::UpdateInfo & /*_info*/)
         }
     }
 
+
     // Convert R, Theta into velocity vector
     double spd = this->_maxSpeed*( rS / this->R.back() );
     math::Vector3 V = spd*math::Vector3(cos(tS), sin(tS), 0);
 
+
+    // Set heading
+    math::Pose p = this->_model->GetWorldPose();
+    p.Set( p.pos, math::Vector3( 0, 0, 0 ) );
+    this->_model->SetWorldPose(p);
+
+    /**
+    // Rotate Velocity to global frame
+    p = p.GetInverse();
+    p.Set(V, p.rot);
+    p.RotatePositionAboutOrigin(p.rot);
+    V = p.pos;
+    **/
+
     // Apply a linear velocity to the model.
     this->_model->SetLinearVel(V);
+    this->_model->SetAngularVel(math::Vector3(0,0,0));
 }
