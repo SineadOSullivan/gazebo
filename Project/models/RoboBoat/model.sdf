@@ -228,7 +228,7 @@
 
     </link>
     	<!--Add Controller Script-->
-
+<!--
 	<plugin name="subsumption_arch" filename="libsubsumption_arch.so">
 		<gain_avoid>5.0</gain_avoid>
 		<gain_boundary>1.0</gain_boundary>
@@ -242,8 +242,8 @@
 
                 <output>SimulationOutput.txt</output>
 	</plugin>
+-->
 
-<!--
 	<plugin name="motor_schema_arch" filename="libmotor_schema_arch.so">
 		<gain_avoid>0.1</gain_avoid>
 		<gain_boundary>0.5</gain_boundary>
@@ -258,7 +258,7 @@
 
                 <output>SimulationOutput.txt</output>
 	</plugin>
--->
+
 <!--
 	<plugin name="damn_arch" filename="libdamn_arch.so">
 		<gain_avoid>5.0</gain_avoid>

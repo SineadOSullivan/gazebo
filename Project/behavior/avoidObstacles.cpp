@@ -149,6 +149,7 @@ math::Vector3 AvoidObstacles::avoidObstaclesMotorSchema(physics::ModelPtr model,
     // Method Variables
     double range, mag = 0.0;
     double angle = minA;
+    kOpen = kOpen / n;
 
     math::Pose P = model->GetWorldPose().GetInverse();
     math::Vector3 V = math::Vector3(0, 0, 0);

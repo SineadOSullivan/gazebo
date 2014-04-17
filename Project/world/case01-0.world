@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version='1.4'>
-  <world name='case02'>
+  <world name='case01-0'>
 
   #World Settings
   ##############################################################################
@@ -57,7 +57,7 @@
           <material>
             <script>
               <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/SkyBlue</name>
+              <name>Gazebo/Red</name>
             </script>
           </material>
         </visual>
@@ -83,7 +83,6 @@
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
       <shadows>1</shadows>
-      <grid>0</grid>
     </scene>
 
     <spherical_coordinates>
@@ -96,7 +95,7 @@
 
     <model name='goal_location'>
       <static>true</static>
-      <pose>8.5 100 0 0 0 0</pose>
+      <pose>4.5 100 0 0 0 0</pose>
       <link name='link'>
         <visual name='visual'>
           <geometry>
@@ -132,16 +131,6 @@
               <length>1</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -157,13 +146,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
     
@@ -177,17 +159,7 @@
               <radius>0.125</radius>
               <length>1</length>
             </cylinder>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
+          </geometry> 
         </collision>
         <visual name='visual'>
           <geometry>
@@ -203,13 +175,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
@@ -224,16 +189,6 @@
               <length>1</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -249,13 +204,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
@@ -270,16 +218,6 @@
               <length>1</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -295,13 +233,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
     
@@ -316,16 +247,6 @@
               <length>1</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -341,13 +262,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
     
@@ -362,16 +276,6 @@
               <length>1</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -387,13 +291,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
@@ -408,16 +305,6 @@
               <length>1</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -433,13 +320,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
@@ -454,16 +334,6 @@
               <length>1</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -479,13 +349,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
@@ -497,7 +360,7 @@
 
     <model name='ob01'>
       <static>true</static>
-      <pose>2.36 35.38 0.15 0 0 0</pose>
+      <pose>7.56 36.64 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -506,16 +369,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -531,19 +384,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>  
   
     <model name='ob02'>
       <static>true</static>
-      <pose>4.64 73.98 0.15 0 0 0</pose>
+      <pose>8.66 86.59 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -552,16 +398,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -577,19 +413,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob03'>
       <static>true</static>
-      <pose>6.23 72.23 0.15 0 0 0</pose>
+      <pose>1.50 3.01 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -598,16 +427,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -623,19 +442,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
   
     <model name='ob04'>
       <static>true</static>
-      <pose>6.43 45.61 0.15 0 0 0</pose>
+      <pose>3.33 31.55 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -644,16 +456,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -669,19 +471,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
   
     <model name='ob05'>
       <static>true</static>
-      <pose>3.67 50.18 0.15 0 0 0</pose>
+      <pose>5.55 54.21 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -690,16 +485,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -715,19 +500,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
   
     <model name='ob06'>
       <static>true</static>
-      <pose>2.86 50.96 0.15 0 0 0</pose>
+      <pose>3.35 47.89 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -736,16 +514,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -761,19 +529,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
   
     <model name='ob07'>
       <static>true</static>
-      <pose>8.40 45.66 0.15 0 0 0</pose>
+      <pose>4.52 52.94 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -782,16 +543,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -807,19 +558,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob08'>
       <static>true</static>
-      <pose>5.70 75.55 0.15 0 0 0</pose>
+      <pose>8.14 69.58 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -828,16 +572,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -853,19 +587,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob09'>
       <static>true</static>
-      <pose>.028 86.17 0.15 0 0 0</pose>
+      <pose>8.64 66.10 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -874,16 +601,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -899,19 +616,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob10'>
       <static>true</static>
-      <pose>1.17 57.32 0.15 0 0 0</pose>
+      <pose>8.27 76.51 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -920,16 +630,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -945,19 +645,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob11'>
       <static>true</static>
-      <pose>3.99 40.14 0.15 0 0 0</pose>
+      <pose>1.03 0.57 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -966,16 +659,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -991,19 +674,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
   
     <model name='ob12'>
       <static>true</static>
-      <pose>3.37 91.08 0.15 0 0 0</pose>
+      <pose>4.85 77.08 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1012,16 +688,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1037,19 +703,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model> 
   
     <model name='ob13'>
       <static>true</static>
-      <pose>5.80 70.35 0.15 0 0 0</pose>
+      <pose>5.19 30.16 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1058,16 +717,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1083,19 +732,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>  
 
     <model name='ob14'>
       <static>true</static>
-      <pose>5.38 44.80 0.15 0 0 0</pose>
+      <pose>5.93 35.06 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1104,16 +746,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1129,19 +761,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob15'>
       <static>true</static>
-      <pose>4.62 26.88 0.15 0 0 0</pose>
+      <pose>2.21 28.29 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1150,16 +775,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1175,19 +790,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob16'>
       <static>true</static>
-      <pose>2.37 82.60 0.15 0 0 0</pose>
+      <pose>8.52 10.12 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1196,16 +804,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1221,19 +819,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob17'>
       <static>true</static>
-      <pose>5.98 33.36 0.15 0 0 0</pose>
+      <pose>6.43 87.23 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1242,16 +833,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1267,19 +848,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob18'>
       <static>true</static>
-      <pose>5.29 35.50 0.15 0 0 0</pose>
+      <pose>0.50 82.53 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1288,16 +862,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1313,19 +877,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
   
     <model name='ob19'>
       <static>true</static>
-      <pose>1.35 30.41 0.15 0 0 0</pose>
+      <pose>8.67 39.77 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1334,16 +891,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1359,19 +906,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob20'>
       <static>true</static>
-      <pose>3.80 52.18 0.15 0 0 0</pose>
+      <pose>2.17 56.48 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1380,16 +920,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1405,19 +935,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob21'>
       <static>true</static>
-      <pose>7.75 19.29 0.15 0 0 0</pose>
+      <pose>0.23 57.41 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1426,16 +949,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1451,19 +964,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob22'>
       <static>true</static>
-      <pose>1.11 76.48 0.15 0 0 0</pose>
+      <pose>2.30 3.04 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1472,16 +978,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1497,19 +993,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob23'>
       <static>true</static>
-      <pose>6.24 70.84 0.15 0 0 0</pose>
+      <pose>3.62 84.51 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1518,16 +1007,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1543,19 +1022,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob24'>
       <static>true</static>
-      <pose>5.81 67.92 0.15 0 0 0</pose>
+      <pose>1.94 89.83 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1564,16 +1036,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1589,19 +1051,12 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
     <model name='ob25'>
       <static>true</static>
-      <pose>6.29 72.62 0.15 0 0 0</pose>
+      <pose>5.67 21.08 0.15 0 0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
@@ -1610,16 +1065,6 @@
               <length>0.3</length>
             </cylinder>
           </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
         </collision>
         <visual name='visual'>
           <geometry>
@@ -1635,13 +1080,6 @@
             </script>
           </material>
         </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
       </link>
     </model>
 
@@ -1654,9 +1092,10 @@
   <include>
     <uri>model://RoboBoat</uri>
     <pose>4.5 -10.0 0 0 0 0</pose>
-    <start_bound>yep</start_bound>
   </include>
 
   ##############################################################################
+    
+	
   </world>
 </sdf>

@@ -1,0 +1,5 @@
+world2-case0 Subsumption 26.900000000 102.61 3.94655 
+world2-case0 Subsumption 27.103000000 102.819 3.8081 
+world1-case0 MotorSchema 27.7000000 104.886 3.88467 
+world1-case0 MotorSchema 26.916000000 104.678 4.02607 
+world2-case0 MotorSchema 28.118000000 108.488 3.87456 
