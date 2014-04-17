@@ -237,7 +237,7 @@
       </link>
     </model>
 
-    <model name='boundary_4'>
+    <model name='start_boundary'>
       <static>true</static>
       <pose>9 0 0.5 0 0 0</pose>
       <link name='link'>
@@ -421,7 +421,7 @@
       </link>
     </model>
 
-    <model name='boundary_8'>
+    <model name='goal_boundary'>
       <static>true</static>
       <pose>9 92 0.5 0 0 0</pose>
       <link name='link'>
@@ -1632,10 +1632,9 @@
   <include>
     <uri>model://RoboBoat</uri>
     <pose>4.5 -10.0 0 0 0 0</pose>
+    <start_bound>yep</start_bound>
   </include>
 
   ##############################################################################
-    
-  
   </world>
 </sdf>

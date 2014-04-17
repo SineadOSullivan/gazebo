@@ -227,8 +227,15 @@
 
       </sensor>
 
-      
-
+        <sensor name='CONTACT' type='contact'>
+	  <!--<plugin name="collision_plugin" filename="libcollision_plugin.so">-->
+          <contact>
+            <collision>hull_col</collision>
+            <collision>top_col</collision>
+            <collision>left_col</collision>
+            <collision>right_col</collision>
+          </contact>
+        </sensor>
 
     </link>
   

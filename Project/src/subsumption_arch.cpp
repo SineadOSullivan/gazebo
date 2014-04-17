@@ -7,11 +7,9 @@ namespace gazebo
     void SubsumptionArch::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
         gzmsg << "Loading Subsumption Architecture plugin..." << endl;
-        // Store the pointer to the model
-        this->_model = _parent;
 
         // Initialize this architecture
-        if (this->initialize(_sdf))
+        if (this->initialize(_parent, _sdf))
         {
             gzmsg << "Successfully loaded parameters!" << endl;
             // Listen to the update event. This event is broadcast every
@@ -28,6 +26,8 @@ namespace gazebo
             return;
         // Update the position
         UpdatePosition(_info);
+        // Check Metrics
+        CheckMetrics();
 
         // No Op
         math::Vector3 v0(0.0d, 0.0d, 0.0d);

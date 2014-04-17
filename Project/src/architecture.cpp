@@ -3,13 +3,32 @@
 using namespace std;
 namespace gazebo
 {
-    bool Architecture::initialize(sdf::ElementPtr _sdf)
+    bool Architecture::initialize(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
         gzmsg << "Initializing the architecture" << endl;
+        this->_model = _parent;
         return (this->LoadLIDAR(_sdf) &&
                 this->LoadGPS(_sdf) &&
                 this->LoadIMU(_sdf) &&
-                this->LoadParams(_sdf));
+                this->LoadParams(_sdf) &&
+                this->LoadMetrics());
+    }
+
+    bool Architecture::LoadMetrics()
+    {
+        // Load start boundary
+        physics::ModelPtr start = _model->GetWorld()->GetModel("start_boundary");
+        this->_startBound = start->GetWorldPose().pos[1];
+        gzmsg << "Start Bound: " << this->_startBound << endl;
+
+        // Load goal boundary
+        physics::ModelPtr goal = _model->GetWorld()->GetModel("goal_boundary");
+        this->_goalBound = goal->GetWorldPose().pos[1];
+        gzmsg << "Goal Bound: " << this->_goalBound << endl;
+
+        // Set times to invalid
+        _startTime.Set(-1.0d);
+        _goalTime.Set(-1.0d);
     }
 
     bool Architecture::LoadLIDAR(sdf::ElementPtr _sdf)
@@ -210,5 +229,25 @@ namespace gazebo
         _currentPosition = math::Vector3( earthRad*lon.Radian(),
                                           earthRad*lat.Radian(),
                                           this->_gps->GetAltitude() );
+    }
+
+    void Architecture::CheckMetrics()
+    {
+        // See if haven't clocked a start time yet, and have passed the start bound
+        if (_startTime.sec == -1.0d && _currentPosition[1] >= _startBound)
+        {
+            // Clock the start time
+            this->_startTime = this->_model->GetWorld()->GetRealTime();
+            gzmsg << "Start Time: " << this->_startTime.sec << "." << this->_startTime.nsec << endl;
+        }
+        else if (_goalTime.sec == -1.0d && _currentPosition[1] >= _goalBound)
+        {
+            // Clock the goal time
+            this->_goalTime = this->_model->GetWorld()->GetRealTime();
+            gzmsg << "Stop Time: " << this->_goalTime.sec << "." << this->_goalTime.nsec << endl;
+            // Calculate the execution time
+            common::Time tm = (this->_goalTime - this->_startTime);
+            gzmsg << "Total Time: " << tm.sec << "." << tm.nsec << " seconds" << endl;
+        }
     }
 }

@@ -12,6 +12,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 find_package(Boost REQUIRED COMPONENTS system)
 include_directories(include)
 include_directories(behavior_include)
+include_directories(metric_include)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
@@ -26,7 +27,12 @@ link_directories(${GAZEBO_LIBRARY_DIRS})
 file(GLOB BEHAVIOR_SRCS behavior_include/*.h behavior/*.cpp)
 file(GLOB ARCHITECTURE_SRCS include/architecture.h src/architecture.cpp)
 
-# Subsumbtion
+# Collision Plugin
+file(GLOB COLLISION_SRCS metric_include/collision_plugin.h metric/collision_plugin.cpp)
+add_library(collision_plugin SHARED ${COLLISION_SRCS})
+target_link_libraries(collision_plugin ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+
+# Subsumption
 file(GLOB SUBSUMPTION_SRCS include/subsumption_arch.h src/subsumption_arch.cpp)
 add_library(subsumption_arch SHARED ${SUBSUMPTION_SRCS} ${BEHAVIOR_SRCS} ${ARCHITECTURE_SRCS})
 target_link_libraries(subsumption_arch ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})

@@ -22,7 +22,7 @@ namespace gazebo
     class Architecture
     {
     public:
-        bool initialize(sdf::ElementPtr _sdf);
+        bool initialize(physics::ModelPtr _parent, sdf::ElementPtr _sdf);
     protected:
         /**
          * @brief LoadIMU
@@ -49,11 +49,15 @@ namespace gazebo
          */
         bool LoadParams(sdf::ElementPtr _sdf);
 
+        bool LoadMetrics();
+
         /**
          * @brief UpdatePosition
          * @param _info
          */
         void UpdatePosition(const common::UpdateInfo & _info);
+
+        void CheckMetrics();
 
         /**
          * Pointer to the model
@@ -101,7 +105,10 @@ namespace gazebo
         double _maxSpeed;
 
     private:
-
+        double _startBound;
+        double _goalBound;
+        common::Time _startTime;
+        common::Time _goalTime;
     };
 }
 #endif

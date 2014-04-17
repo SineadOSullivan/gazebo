@@ -94,7 +94,8 @@ math::Vector3 AvoidObstacles::avoidObstaclesSubsumption(sensors::RaySensorPtr li
 #ifdef LOGGING
         gzmsg << "Angle: " << angle << endl;
 #endif
-        return math::Vector3(std::cos(angle), std::sin(angle), 0.0d);
+        math::Vector3 V(std::cos(angle), std::sin(angle), 0.0d);
+        return V;
     }
     // Don't bother considering this behavior
     else
